@@ -1,19 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.IO;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public static class SaveLoadManager
 {
-    private static readonly Dictionary<Type, string> _filePaths = new Dictionary<Type, string>();
-
-    // Register a data type with a custom file name
-    public static void RegisterDataType<T>(string fileName)
-    {
-        _filePaths[typeof(T)] = fileName;
-    }
 
     // Save data of a specific type
     public static void Save<T>(T data) where T : ISaveData

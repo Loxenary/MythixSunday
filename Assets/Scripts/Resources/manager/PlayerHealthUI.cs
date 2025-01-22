@@ -7,6 +7,8 @@ public class PlayerHealthUI : MonoBehaviour
     public Health health = new(100);
     private Slider _sliderHealth;
 
+    [SerializeField] private float AnimationDuration;
+ 
     private void Awake()
     {
         _sliderHealth = GetComponent<Slider>();
@@ -27,7 +29,7 @@ public class PlayerHealthUI : MonoBehaviour
 
     private IEnumerator AnimateHealth(float newValue)
     {
-        SmoothValueAnimator healthAnimator = new SmoothValueAnimator(_sliderHealth.value, newValue);
+        SmoothValueAnimator healthAnimator = new SmoothValueAnimator(_sliderHealth.value, newValue, AnimationDuration);
 
         while (healthAnimator.IsRunning())
         {

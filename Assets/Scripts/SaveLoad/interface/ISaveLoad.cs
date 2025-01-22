@@ -1,4 +1,4 @@
 public interface ISaveLoad{
-    void SaveData();
-    void LoadData();
+    void Save();
+    void Load();
 }
