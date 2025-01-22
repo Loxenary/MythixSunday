@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public abstract class Audio 
+[Serializable]
+public class Audio 
 {
     protected Audio(string key, AudioClip audioClip, float clipVolume){ 
         _key = key;
@@ -8,11 +10,12 @@ public abstract class Audio
         _volume = clipVolume;
     }
 
-    private static float s_masterVolume = 0;
+    private static float s_masterVolume = 1;
 
-    protected readonly string _key;
-    protected readonly AudioClip _audioClip;
-    protected float _volume = 100; 
+    [SerializeField] protected string _key;
+    [SerializeField] protected AudioClip _audioClip;
+    [SerializeField, Range(0, 1)] 
+    protected float _volume = 1; 
  
     public string Key => _key;
     public AudioClip AudioClip => _audioClip;
@@ -20,9 +23,10 @@ public abstract class Audio
     public static float MasterVolume{
         get { return s_masterVolume; }
         set{
-            if(value >= 0 && value <= 100){
-                s_masterVolume = value;
+            while(value > 1){
+                value /= 100;
             }
+            Debug.Log($"Setting Master Value to {value}");                s_masterVolume = value;
         }
     }
     public float ClipVolume{
@@ -31,6 +35,7 @@ public abstract class Audio
             while(value > 1){
                 value /=100;
             }
+            Debug.Log($"Setting Clip {_key} Volume to {value}");
             _volume = value;
         }
     }

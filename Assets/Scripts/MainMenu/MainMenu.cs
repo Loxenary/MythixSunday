@@ -18,21 +18,20 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button settingButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button backButton;
 
-    [Header("Others")]
-    private Settings settings;
-
-    private List<GameObject> _panels;
+    private  readonly List<GameObject> _panels = new();
 
     private void Start(){
+        
         _panels.Add(mainMenuPanel);
         _panels.Add(settingsPanel);
-
+        
         startButton.onClick.AddListener(OnPlayButtonClicked);
         settingButton.onClick.AddListener(ShowSettings);
-
-        
-        settings.BackButtonPressed += ShowMainMenu;
+        exitButton.onClick.AddListener(ExitGame);
+        backButton.onClick.AddListener(ShowMainMenu);
+        SetActivePanel(mainMenuPanel);
     }
 
     private void OnPlayButtonClicked(){
@@ -63,5 +62,4 @@ public class MainMenu : MonoBehaviour
     private void ExitGame(){
         Application.Quit();
     }
-
 }

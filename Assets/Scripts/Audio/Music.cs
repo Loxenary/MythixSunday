@@ -25,6 +25,7 @@ public class Music : Audio{
             while(value > 1){
                 value /= 100;            
             }
+            Debug.Log($"Setting Music Volume to {value}");
             s_musicMasterVolume = value;
         }
     }

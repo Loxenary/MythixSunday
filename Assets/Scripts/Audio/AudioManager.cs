@@ -6,26 +6,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     #region Singleton Setup
-    private static AudioManager _instance;
 
-    public static AudioManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new AudioManager();
-            }
-            return _instance;
-        }
-        set
-        {
-            if (_instance != null)
-            {
-                // Prevent changes to the singleton instance
-            }
-        }
-    }
+    public static AudioManager Instance{get; private set;}
     #endregion
 
     #region Audio Settings
@@ -38,44 +20,48 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Default time interval between playing the same SFX (in seconds)")]
     public float defaultSfxCooldown = 0.1f; // Default cooldown for SFX
 
-    private List<Music> _musicTracks; // List of available music tracks
-    private List<SoundEffect> _soundEffects; // List of available sound effects
-
     private Dictionary<string, Music> _musicDictionary; // Dictionary for mapping music keys to tracks
     private Dictionary<string, SoundEffect> _soundEffectDictionary; // Dictionary for mapping sound effect keys to effects
     private Dictionary<string, SFXCooldown> _sfxCooldownDictionary; // Dictionary to track SFX cooldowns
     #endregion
 
     #region Properties
-    public List<Music> MusicTracks => _musicTracks; // Exposes music tracks as a read-only list
+    [SerializeField] private List<Music> musicTracks;
+    [SerializeField] private List<SoundEffect> soundEffectsTracks;
 
-    public List<SoundEffect> SoundEffects => _soundEffects; // Exposes sound effects as a read-only list
     #endregion
 
     #region Initialization
     private void Awake()
     {
-        if (Instance == null)
+        // Singleton setup
+        if (Instance != null && Instance != this)
         {
-            Instance = this; // Set the instance if it doesn't already exist
-            DontDestroyOnLoad(gameObject); // Keep the AudioManager between scenes
-        }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instance
+            // If an instance already exists and it's not this one, destroy this GameObject
+            Destroy(gameObject);
             return;
         }
 
-        // Initialize audio dictionaries
+        // Set this as the singleton instance
+        Instance = this;
+
+        // Ensure this GameObject persists across scene loads
+        DontDestroyOnLoad(gameObject);
+
+        // Initialize dictionaries
+        _musicDictionary = new Dictionary<string, Music>();
+        _soundEffectDictionary = new Dictionary<string, SoundEffect>();
+        _sfxCooldownDictionary = new Dictionary<string, SFXCooldown>();
+
+        // Initialize music tracks and sound effects
         InitializeMusicTracks();
         InitializeSoundEffects();
     }
-
     private void InitializeMusicTracks()
     {
         _musicDictionary = new Dictionary<string, Music>();
 
-        foreach (Music music in _musicTracks)
+        foreach (Music music in musicTracks)
         {
             if (!_musicDictionary.ContainsKey(music.Key))
             {
@@ -92,7 +78,7 @@ public class AudioManager : MonoBehaviour
     {
         _soundEffectDictionary = new Dictionary<string, SoundEffect>();
 
-        foreach (SoundEffect soundEffect in _soundEffects)
+        foreach (SoundEffect soundEffect in soundEffectsTracks)
         {
             if (!_soundEffectDictionary.ContainsKey(soundEffect.Key))
             {

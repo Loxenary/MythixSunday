@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 [Serializable]
@@ -8,10 +7,7 @@ public class Settings : MonoBehaviour, ISaveLoad
 {
 
     [Header("Button")]
-    [SerializeField] private Button _backButton;
     [SerializeField] private Button _saveButton;
-    
-    public event Action BackButtonPressed;
 
     [Header("Slider")]
     [SerializeField] private Slider masterSlider;
@@ -44,7 +40,7 @@ public class Settings : MonoBehaviour, ISaveLoad
         masterSlider.onValueChanged.AddListener((newValue) => _audioManager.SetMasterVolume(newValue));
         musicSlider.onValueChanged.AddListener((newValue) => _audioManager.SetMusicMasterVolume(newValue));
         sfxSlider.onValueChanged.AddListener((newValue) => _audioManager.SetSFXMasterVolume(newValue));
-        _backButton.onClick.AddListener(() => BackButtonPressed.Invoke());
+        
         _saveButton.onClick.AddListener(() => Save());
     }
 
