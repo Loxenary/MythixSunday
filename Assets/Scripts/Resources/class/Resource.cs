@@ -1,7 +1,7 @@
 using System;
-using Unity.VisualScripting;
 
-public abstract class Resource<TValue>  {
+[Serializable]
+public abstract class Resource<TValue> where TValue : IComparable<TValue> {
     public TValue Value { get; private set; }
 
     public event Action<TValue> OnValueChanged; // Event triggered when the value changes
@@ -14,20 +14,15 @@ public abstract class Resource<TValue>  {
     // Increase the value of the resource
     public void Add(TValue amount)
     {
-        dynamic currentValue = Value;
-        dynamic delta = amount;
-        Value = currentValue + delta;
-
+        
+        Value = NumberHelper.Add(Value, amount);
         OnValueChanged?.Invoke(Value); // Trigger the event
     }
 
     // Decrease the value of the resource
     public void Reduce(TValue amount)
     {
-        dynamic currentValue = Value;
-        dynamic delta = amount;
-        Value = currentValue - delta;
-
+        Value = NumberHelper.Subtract(Value, amount);
         OnValueChanged?.Invoke(Value); // Trigger the event
     }
 
@@ -36,9 +31,5 @@ public abstract class Resource<TValue>  {
     {
         Value = value;
         OnValueChanged?.Invoke(Value); // Trigger the event
-    }
-
-    public virtual void OnModify(TValue value){
-
     }
 }
