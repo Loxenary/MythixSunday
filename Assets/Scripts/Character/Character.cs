@@ -7,7 +7,7 @@ public class Character : ScriptableObject
     public Sprite LeftDirectionIcon;
     public Sprite RightDirectionIcon;
 
-    public IntHealth Health;
+    public IntHealth Health = new IntHealth(1);
     private float _moveSpeed = 1; 
     private float _defaultMoveSpeed =  1;
 

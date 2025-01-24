@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     public void Awake()
     {
-        if(Instance != this && this != null){
+        if(Instance != this && Instance != null){
             Destroy(gameObject);            
         }
 
@@ -21,13 +21,14 @@ public class InputManager : MonoBehaviour
     }
 
     public void Update(){
-        if(!Input.anyKeyDown){
-            return;
-        }
-        foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode))){
+        if(Input.anyKeyDown){    
+            foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode))){
+
             if(Input.GetKeyDown(key)){
+                Debug.Log("Pressed Key :" + key);
                 onKeyPressed.Invoke(key);
             }
+        }
         }
     }
 }

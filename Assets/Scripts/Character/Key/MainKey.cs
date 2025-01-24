@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class MainKey : BaseKey, IKey
 {
-    public bool ReduceHealth(int amount)
+    public MainKey(Character character) : base(character)
     {
-        return false;
     }
 
     public override bool IsDestructable => true;
-
-    
 }

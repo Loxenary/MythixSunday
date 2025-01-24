@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,16 +7,21 @@ public class RoutePath : MonoBehaviour
 {
     public List<Transform> transformPoints = new(); // Control points for the path
 
+    public static Action onfinishLoadingEvent;
+
     private void Start()
     {
         if(transformPoints == null || transformPoints.Count <= 0){
-            transformPoints = GetComponentsInChildren<Transform>().ToList().FindAll(tr => tr != this.GetComponent<Transform>());
+            transformPoints = GetComponentsInChildren<Transform>().ToList().
+            FindAll(tr => tr != this.GetComponent<Transform>());
+            onfinishLoadingEvent.Invoke();
         }
     }
 
     // Draw the path in the editor for visualization
     private void OnDrawGizmos()
     {
+        
         List<Vector3> points = TransformsToListVector3(transformPoints);
         if (points.Count < 2) return;
 
@@ -27,8 +33,12 @@ public class RoutePath : MonoBehaviour
     }
 
     private List<Vector3> TransformsToListVector3(List<Transform> listTrans){
+        if(listTrans == null){}
         List<Vector3> points = new();
         foreach(Transform t in listTrans){
+            if(t == null){
+                continue;
+            }
             points.Add(t.position);
         }
         return points;

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class BaseKey : MonoBehaviour
+public  class BaseKey : MonoBehaviour, IKey
 {    
     [SerializeField] private Character character;
 
     public Character Character{
         get{ return character; }
-        private set{ character = value; }
+        set{ character = value; }
     }
 
     public void IncreaseSpeed(float speed){
@@ -18,5 +18,13 @@ public class BaseKey : MonoBehaviour
 
     protected void ReducingHealth(int amount){
         character.Health.Reduce(amount);   
+    }
+
+    public virtual bool ReduceHealth(int amount){
+        return false;
+    }
+
+    public BaseKey(Character character){
+        this.character = character;
     }
 }

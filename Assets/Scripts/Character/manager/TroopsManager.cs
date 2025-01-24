@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TroopsManager : MonoBehaviour
 {
-    public List<IKey> AvailableCharacters;
-
+    public List<Character> AvailableCharacters;
+    public static List<Character> S_SpawnedCharacters = new();
     [SerializeField] private GameObject keyPrefab;
 
     public RoutePath altPath;
@@ -17,40 +18,70 @@ public class TroopsManager : MonoBehaviour
     [SerializeField] private MainKey altMainKey;
     [SerializeField] private MainKey f4MainKey;
 
-    public float spawnInterval = 3f;  
+    public float SpawnInterval = 4f;  
+    private float SpawnIntervalBetweenRandomLoops = 1f;
 
     private void Start(){
         InputManager.Instance.onKeyPressed += HandleKeyPress;
+        LoadKeysFromResources();
+        RoutePath.onfinishLoadingEvent += SetupMainTroopsAndKeysMovement;
+    }
+
+    private void SetupMainTroopsAndKeysMovement(){
+        if(!altMainKey || !f4MainKey){
+            Debug.LogWarning("Key not setup yet");
+            return;
+        }
         altTroop = new Troops(altMainKey, altPath);
         f4Troop = new Troops(f4MainKey, f4Path);
+        Movement altMovement = altMainKey.gameObject.GetComponent<Movement>();
+        Movement f4Movement = f4MainKey.gameObject.GetComponent<Movement>();
+
+        if(!altMovement || !f4Movement){
+            Debug.LogWarning("Movement script aren't set in the Keys");
+            return;
+        }
+        altMovement.Initialize(altPath.transformPoints);
+        f4Movement.Initialize(f4Path.transformPoints);
         StartCoroutine(SpawnTroops());
+    }
+
+
+    private void LoadKeysFromResources(){
+        Character[] loadedKeys = Resources.LoadAll<Character>("Character");
+        AvailableCharacters = loadedKeys.ToList();
+        
     }
 
     private IEnumerator SpawnTroops(){
         while(true){
-            SpawnTroop(altTroop);
-            SpawnTroop(f4Troop);
-            
-
-            yield return new WaitForSeconds(spawnInterval);
+            int troopSize = Random.Range(1,6);
+            for(int i = 0; i < troopSize; i++){
+                SpawnTroop(altTroop);
+                SpawnTroop(f4Troop);
+                
+                yield return new WaitForSeconds(SpawnIntervalBetweenRandomLoops);
+            }
+            yield return new WaitForSeconds(SpawnInterval);
         }
+        
     }
 
-    private void SpawnTroop(Troops troop){
-        int troopSize = Random.Range(1,6);
-        List<IKey> charactersForThisBatch = new (AvailableCharacters);
-
-        for(int i = 0; i < troopSize; i++){
-            if(charactersForThisBatch.Count >  0 ){
-                int randomIndex = Random.Range(0, charactersForThisBatch.Count);
-                IKey randomCharacter = charactersForThisBatch[randomIndex];
-                troop.SpawnKey(keyPrefab, randomCharacter);
-            }
-            else{
-                troop.SpawnKey(keyPrefab, AvailableCharacters[0]);
-            }
+    private void SpawnTroop(Troops troop){        
+        List<Character> charactersForThisBatch = new (AvailableCharacters.FindAll(character => !S_SpawnedCharacters.Contains(character)));
+        if(charactersForThisBatch.Count >  0 ){
+            int randomIndex = Random.Range(0, charactersForThisBatch.Count);
+            Character randomCharacter = charactersForThisBatch[randomIndex];
+            S_SpawnedCharacters.Add(randomCharacter);
+            troop.SpawnKey(keyPrefab, randomCharacter);
         }
+        else{
+            troop.SpawnKey(keyPrefab, AvailableCharacters[0]);
+        }
+        
     }
+
+    
 
     private void HandleKeyPress(KeyCode key){
         // Check Alt's troop

@@ -7,29 +7,32 @@ public class Troops
     public RoutePath Path { get; private set;}
     public List<NormalKey> Keys { get; private set;}
 
-    public Queue<NormalKey> AttachedKeys {get; private set;}
+    public Queue<NormalKey> AttachedKeys  {get; private set;}
 
     public Troops(MainKey character, RoutePath path){
         Character = character;
         Path = path;
+        AttachedKeys = new();
         Keys = new ();
     }
     
-    public void SpawnKey(GameObject keyPrefab,IKey keyCharacter){
-        int troopSize = Random.Range(1,6);
+    public void SpawnKey(GameObject keyPrefab,Character keyCharacter){
+        int troopSize = Random.Range(1,2);
          for (int i = 0; i < troopSize; i++)
         {
             // Spawn the key at the starting point of the path
             Vector3 spawnPosition = Path.GetPositionAlongPath(0); // Start at the beginning of the path
-            Object.Instantiate(keyPrefab, spawnPosition, Quaternion.identity);
-            IKey key = keyPrefab.GetComponent<IKey>();
-
+            GameObject obj = Object.Instantiate(keyPrefab, spawnPosition, Quaternion.identity);
+            Movement movement = obj.GetComponent<Movement>();
             // Assign the character to the key
-            key = keyCharacter;
+            movement.Key = obj.GetComponent<NormalKey>();
+            movement.Key.Character = keyCharacter;
+            movement.Initialize(Path.transformPoints);
+            movement.enabled = true;
 
 
             // Set the key to normal mode (not attached) unless it's the first key and no attached key exists
-             if (key is NormalKey normalKey)
+             if (movement.Key is NormalKey normalKey)
             {
                 if (Random.Range(0, 2) == 0) // 50% chance to make it attached
                 {
@@ -54,6 +57,7 @@ public class Troops
             }
             if(!Keys[i].IsAttached){
                 if(Keys[i].ReduceHealth(1)){
+                    TroopsManager.S_SpawnedCharacters.Remove(Keys[i].Character);
                     Keys.RemoveAt(i);
                 }
                 return true;
@@ -61,6 +65,7 @@ public class Troops
             if(AttachedKeys.Count > 0 && Keys[i] == AttachedKeys.Peek()){
                 if(Keys[i].ReduceHealth(1)){
                     AttachedKeys.Dequeue();
+                    TroopsManager.S_SpawnedCharacters.Remove(Keys[i].Character);
                     Keys.RemoveAt(i);
                 }
                 return true;
