@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
 
             if(Input.GetKeyDown(key)){
                 Debug.Log("Pressed Key :" + key);
-                onKeyPressed.Invoke(key);
+                onKeyPressed?.Invoke(key);
             }
         }
         }

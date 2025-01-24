@@ -1,7 +1,7 @@
 public class NormalKey : BaseKey, IKey
 {
 
-    public bool IsAttached = false;
+    // public bool IsAttached = false;
 
     public override bool ReduceHealth(int amount)
     {   

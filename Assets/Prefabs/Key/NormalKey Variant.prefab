@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 196271732628859753, guid: 7db6de4ca13f78249abd244d6a861cdc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2716420554098127647, guid: 7db6de4ca13f78249abd244d6a861cdc, type: 3}
       propertyPath: character
       value: 
@@ -91,4 +95,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 28cf78e08dcc4a636af89e509173b89a, type: 2}
-  IsAttached: 0

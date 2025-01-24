@@ -44,6 +44,10 @@ public class Movement : MonoBehaviour
 
     private bool CanMove()
     {
+        if (character.IsAttached)
+        {
+            return false;
+        }
         // Add any conditions for movement here (e.g., game state, key state)
         if(_pathPoints == null || _pathPoints.Count == 0){
             return false;

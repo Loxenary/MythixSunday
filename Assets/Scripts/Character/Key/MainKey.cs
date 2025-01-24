@@ -32,7 +32,7 @@ public class MainKey : BaseKey, IKey
     {
         normalKey.IsAttached = true;
         normalKey.transform.SetParent(this.transform);
-        normalKey.transform.localPosition = Vector3.zero;
+        normalKey.transform.localPosition = new Vector3(1,1,0);
         Debug.Log("Attached boi");
     }
 
