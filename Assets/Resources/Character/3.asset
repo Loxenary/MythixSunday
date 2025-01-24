@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261d049aaa416624aa6ac019fbd3902f, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  KeyCode: 122
+  KeyCode: 51
   LeftDirectionIcon: {fileID: 0}
   RightDirectionIcon: {fileID: 0}

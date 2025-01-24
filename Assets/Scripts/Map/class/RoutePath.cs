@@ -14,7 +14,7 @@ public class RoutePath : MonoBehaviour
         if(transformPoints == null || transformPoints.Count <= 0){
             transformPoints = GetComponentsInChildren<Transform>().ToList().
             FindAll(tr => tr != this.GetComponent<Transform>());
-            onfinishLoadingEvent.Invoke();
+            onfinishLoadingEvent?.Invoke();
         }
     }
 
