@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class MainKey : NormalKey, IKey
+public class MainKey : BaseKey, IKey
 {
-    public override void Delete()
+    public bool ReduceHealth(int amount)
     {
-        //Do Nothing
+        return false;
     }
 
     public override bool IsDestructable => true;
+
+    
 }

@@ -18,7 +18,7 @@ public static class SaveLoadManager
     // Load data of a specific type
     public static T Load<T>() where T : ISaveData, new()
     {
-        T data = new T();
+        T data = new();
         string fileName = data.FileName;
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
         if(File.Exists(filePath)){

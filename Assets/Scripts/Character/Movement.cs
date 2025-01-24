@@ -1,51 +1,53 @@
-using System.Runtime.Serialization.Json;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private bool isMovingRight = true;
+    [SerializeField] private Character character;
+    [SerializeField] private Transform[] pathPoints;   // Array of points defining the path
 
-    [SerializeField] private float maxSpeed = 10f;
+    private int currentPointIndex = 0; // Current target point index
+    private Vector3 targetPosition;    // Current target position
 
-    public bool GetMovingDirection() => isMovingRight;
-
-    private float _xMovement;
-
-    private Rigidbody2D _rb;
-
-    private void Start(){
-        _rb = GetComponent<Rigidbody2D>();
-
-    }
-
-    private void Update(){
-        if(Input.GetKey(KeyCode.Dollar)){
-            Debug.Log("TESTINGOSIEJ");
-        }
-        if(!CanMove()){
+    private void Start()
+    {
+        if (pathPoints == null || pathPoints.Length == 0)
+        {
+            Debug.LogError("Path points are not assigned!");
+            enabled = false; // Disable the script if no path points are assigned
             return;
         }
-        _xMovement = 2;
-        HandleMove();
+
+        // Set the initial target position
+        targetPosition = pathPoints[currentPointIndex].position;
     }
 
-    private bool CanMove(){
-        if(transform.childCount > 1){
-            return true;
-        }
-        return false;
-    }
-
-    private void HandleMove()
+    private void Update()
     {
-        float targetVelocityX = _xMovement * maxSpeed;
-        float velocityChangeX = targetVelocityX - _rb.linearVelocityX;
+        if (!CanMove())
+        {
+            return;
+        }
 
-        Vector3 moveVector = isMovingRight ? Vector3.right : Vector3.left; 
-        _rb.AddForce(velocityChangeX * moveVector, ForceMode2D.Force);
-
-        float clampedVelocityX = Mathf.Clamp(_rb.linearVelocityX, -maxSpeed, maxSpeed);
-        _rb.linearVelocity = new Vector2(clampedVelocityX, 0);
+        MoveAlongPath();
     }
 
+    private bool CanMove()
+    {
+        // Add any conditions for movement here (e.g., game state, key state)
+        return true;
+    }
+
+    private void MoveAlongPath()
+    {
+        // Move towards the target position
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, character.MovementSpeed * Time.deltaTime);
+
+        // Check if the key has reached the target position
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            // Move to the next point in the path
+            currentPointIndex = (currentPointIndex + 1) % pathPoints.Length;
+            targetPosition = pathPoints[currentPointIndex].position;
+        }
+    }
 }

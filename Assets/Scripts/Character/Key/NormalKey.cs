@@ -1,20 +1,18 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class NormalKey : MonoBehaviour, IKey
+public class NormalKey : BaseKey, IKey
 {
-    public Character Character{
-        get; 
-        private set;
-    }
 
-    public void IncreaseSpeed(float speed){
-        Character.MovementSpeed = speed;
-    }
+    public bool IsAttached = false;
 
-    public virtual bool IsDestructable => false;
-    public KeyCode Key => Character.KeyCode;
-
-    public virtual void Delete(){
-        Destroy(gameObject);
+    public bool ReduceHealth(int amount)
+    {   
+        ReducingHealth(amount);
+        if(Character.Health.Value == 0){
+            Destroy(gameObject);
+            return true;
+        }
+        return false;
     }
 }
