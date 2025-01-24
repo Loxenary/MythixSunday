@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class SettingsSaveData : ISaveData
 {
     public string FileName => "Settings";

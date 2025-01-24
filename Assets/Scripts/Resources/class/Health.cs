@@ -1,9 +1,18 @@
 using System;
 
 [Serializable]
-public class Health : Resource<float>
+public class IntHealth : Resource<int>
 {
-    public Health(float initialValue) : base(initialValue)
+    public IntHealth(int initialValue) : base(initialValue)
+    {
+    }
+}
+
+
+[Serializable]
+public class FloatHealth : Resource<float>
+{
+    public FloatHealth(float initialValue) : base(initialValue)
     {
     }
 }

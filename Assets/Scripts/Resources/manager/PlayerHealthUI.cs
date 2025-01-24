@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    public Health health = new(100);
+    public FloatHealth health = new(100);
     private Slider _sliderHealth;
 
     [SerializeField] private float AnimationDuration;

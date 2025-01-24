@@ -5,11 +5,11 @@ public class UIInventory : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Transform inventoryPanel; // Parent object for inventory slots
-    [SerializeField] private GameObject inventorySlotPrefab; // Prefab for an inventory slot
-
-    
+    [SerializeField] private GameObject inventorySlotPrefab; // Prefab for an inventory slot    
 
     private List<UIInventorySlot> _inventorySlots = new (); // List of UI inventory slots
+
+    [SerializeField] private DraggedObject draggedObjectPlaceholder;
 
 
     private void Start(){
@@ -36,6 +36,7 @@ public class UIInventory : MonoBehaviour
         {
             GameObject slot = Instantiate(inventorySlotPrefab, inventoryPanel);
             _inventorySlots.Add(slot.GetComponent<UIInventorySlot>());
+            _inventorySlots[i].SetDraggedObject(draggedObjectPlaceholder);
         }
 
         UpdateUI();

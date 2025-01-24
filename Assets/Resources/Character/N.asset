@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1968d1ba0da517c45802fb072d172833, type: 3}
-  m_Name: Item1
+  m_Script: {fileID: 11500000, guid: 261d049aaa416624aa6ac019fbd3902f, type: 3}
+  m_Name: N
   m_EditorClassIdentifier: 
-  itemName: New Item
-  icon: {fileID: 534335525, guid: 7162c761871c3d344b854e65534d9035, type: 3}
-  isStackable: 1
-  _maxStackSize: 2
-  description: Item Description
+  Name: N key
+  KeyCode: 110
