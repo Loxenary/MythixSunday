@@ -11,7 +11,8 @@ public class MovementBase : MonoBehaviour
 
     private void Start(){
         _targetPosition = SnapToGrid(transform.position);
-    }  
+        transform.position = _targetPosition;
+    }
 
      public void ResetMovement()
     {
@@ -31,8 +32,8 @@ public class MovementBase : MonoBehaviour
         if(_moveX != 0 || _moveY != 0){
             Vector2 newPosition = new Vector2(transform.position.x + _moveX * gridSize, transform.position.y + _moveY * gridSize);
                 
-            _targetPosition = newPosition;
-            _isMoving = true;   
+            _targetPosition = SnapToGrid(newPosition);
+            _isMoving = true;
         }
     } 
 
@@ -42,11 +43,11 @@ public class MovementBase : MonoBehaviour
     }
 
     protected Vector2 SnapToGrid(Vector2 position){
-        float gridSize = GridManager.Instance.GridSize;
-        float snappedX = Mathf.Round(position.x / gridSize) * gridSize;
-        float snappedY = Mathf.Round(position.y / gridSize) * gridSize;
-        return new Vector2(snappedX, snappedY);
-    }   
+        Grid grid = GridManager.Instance.GetComponent<Grid>();
+        Vector3Int cellPosition = grid.WorldToCell(position);
+        Vector3 snappedPosition = grid.CellToWorld(cellPosition) + grid.cellSize / 2f;
+        return new Vector2(snappedPosition.x, snappedPosition.y);
+    }
 
     protected void MoveToTarget(){
         float gridSize = GridManager.Instance.GridSize;
