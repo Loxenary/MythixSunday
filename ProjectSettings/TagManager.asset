@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MainKey
   - NormalKey
+  - ALT
+  - Enemy
+  - PowerUP
   layers:
   - Default
   - TransparentFX

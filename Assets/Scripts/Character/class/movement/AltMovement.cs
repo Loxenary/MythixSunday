@@ -19,6 +19,11 @@ public class AltMovement : MovementBase
         if (entity.CompareTag("Enemy"))
         {
             // TODO : Reduce health based on enemy attack value
+            EnemyController enemyController = entity.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                GameManager.Instance.ReduceHealth(enemyController.damage);
+            }
         }
         else if (entity.CompareTag("PowerUP"))
         {
