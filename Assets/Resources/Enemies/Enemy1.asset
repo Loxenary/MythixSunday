@@ -15,5 +15,15 @@ MonoBehaviour:
   enemyName: BEBEK
   moveDelay: 1
   damage: 10
-  health: 10
+  health: 100
   maxCoinDrop: 200
+  movementRange: 1
+  attackType: 0
+  attackRange: 0
+  canTeleport: 0
+  teleportRange: 0
+  specialAbility: 0
+  abilityRange: 0
+  movementIndicatorPrefab: {fileID: 7625398167172743996, guid: 92db3b37672c37e42a07ec37fde352df, type: 3}
+  movementIndicatorColor: {r: 1, g: 0, b: 0.10283661, a: 1}
+  movementIndicatorDuration: 1
