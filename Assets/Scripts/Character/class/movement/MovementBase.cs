@@ -13,8 +13,21 @@ public class MovementBase : MonoBehaviour
         _targetPosition = SnapToGrid(transform.position);
     }  
 
+     public void ResetMovement()
+    {
+        _moveX = 0f;
+        _moveY = 0f;
+    }
+
     protected void Move(){
         float gridSize = GridManager.Instance.GridSize;
+
+         if (_moveX != 0 && _moveY != 0)
+        {
+            // Prioritize horizontal movement over vertical movement
+            _moveX = 0f;
+        }
+
         if(_moveX != 0 || _moveY != 0){
             Vector2 newPosition = new Vector2(transform.position.x + _moveX * gridSize, transform.position.y + _moveY * gridSize);
                 
@@ -22,6 +35,11 @@ public class MovementBase : MonoBehaviour
             _isMoving = true;   
         }
     } 
+
+
+    public Vector2 GetMovementDirection(){
+        return new (_moveX, _moveY);
+    }
 
     protected Vector2 SnapToGrid(Vector2 position){
         float gridSize = GridManager.Instance.GridSize;

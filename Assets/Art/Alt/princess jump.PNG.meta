@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: 0115887741747cc4cb16f32f54aa93ae
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5501954138390002171
+    second: princess jump_0
+  - first:
+      213: 5952692403557880123
+    second: princess jump_1
+  - first:
+      213: -2406838863839778515
+    second: princess jump_2
+  - first:
+      213: -9092791804226611284
+    second: princess jump_3
+  - first:
+      213: 1705774317945313543
+    second: princess jump_4
+  - first:
+      213: 7169376909177384728
+    second: princess jump_5
+  - first:
+      213: -3753068314557505707
+    second: princess jump_6
+  - first:
+      213: -8458261610358224209
+    second: princess jump_7
+  - first:
+      213: -8011168427574549467
+    second: princess jump_8
+  - first:
+      213: 5068425978829695488
+    second: princess jump_9
+  - first:
+      213: -2733310895255180628
+    second: princess jump_10
+  - first:
+      213: 325493304571422724
+    second: princess jump_11
+  - first:
+      213: 564052771308629303
+    second: princess jump_12
+  - first:
+      213: -1133998404390260303
+    second: princess jump_13
+  - first:
+      213: -7161063620047098652
+    second: princess jump_14
+  - first:
+      213: 508207554963837639
+    second: princess jump_15
+  - first:
+      213: 8624068135449617776
+    second: princess jump_16
+  - first:
+      213: 6429035463157507151
+    second: princess jump_17
+  - first:
+      213: 1192300264795460542
+    second: princess jump_18
+  - first:
+      213: 3149486496231976230
+    second: princess jump_19
+  - first:
+      213: -6392280008811346140
+    second: princess jump_20
+  - first:
+      213: -3297622764299158769
+    second: princess jump_21
+  - first:
+      213: -6377712674387188867
+    second: princess jump_22
+  - first:
+      213: 6953791273349358231
+    second: princess jump_23
+  - first:
+      213: -6836730403327885212
+    second: princess jump_24
+  - first:
+      213: -254798054517496872
+    second: princess jump_25
+  - first:
+      213: 5654357105250318447
+    second: princess jump_26
+  - first:
+      213: 6854918899455793327
+    second: princess jump_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 600
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: princess jump_16
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 381
+        width: 1287
+        height: 1719
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0756d34e648dea770800000000000000
+      internalID: 8624068135449617776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: princess jump_20
+      rect:
+        serializedVersion: 2
+        x: 3116
+        y: 475
+        width: 1217
+        height: 2025
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42708f1233f0a47a0800000000000000
+      internalID: -6392280008811346140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: princess jump_23
+      rect:
+        serializedVersion: 2
+        x: 4547
+        y: 77
+        width: 1147
+        height: 1978
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79223320254d08060800000000000000
+      internalID: 6953791273349358231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: princess jump_25
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 59
+        width: 1234
+        height: 1579
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d32607f486c67cf0800000000000000
+      internalID: -254798054517496872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: princess jump_27
+      rect:
+        serializedVersion: 2
+        x: 1936
+        y: 179
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa89c2e8b60912f50800000000000000
+      internalID: 6854918899455793327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 929c3756c7cd7884dbf0e798f439760c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      princess jump_11: -273340810
+      princess jump_7: 718129746
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
