@@ -869,6 +869,7 @@ GameObject:
   - component: {fileID: 364530681}
   - component: {fileID: 364530680}
   - component: {fileID: 364530682}
+  - component: {fileID: 364530683}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -916,6 +917,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec334bf47e376a4c804e09600dc4ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &364530683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364530679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b84dc89ac04c0c4c93c5a7d989ae082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1349811502}
+  tiles:
+  - {fileID: 11400000, guid: eadae72cdf70aa545bbac7b9240d6b2b, type: 2}
+  - {fileID: 11400000, guid: bea5eb7fe8b2c54409aaaddbd3737054, type: 2}
+  - {fileID: 11400000, guid: 2a178896fca18bf4e90a91e8ec8803bc, type: 2}
+  - {fileID: 11400000, guid: aa10f42a47780ff4586a28957a2614b5, type: 2}
+  chunkSize: 16
+  loadRadius: 2
 --- !u!1 &629458853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,10 +1665,10 @@ RectTransform:
   - {fileID: 658125699}
   m_Father: {fileID: 1688041040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -1820, y: -980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982630282
 MonoBehaviour:
@@ -1696,7 +1717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.6851807, y: -1.2808075}
+  m_AnchoredPosition: {x: -7.6851807, y: -1.2808228}
   m_SizeDelta: {x: 1823.9467, y: 976.0167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005949131

@@ -23,9 +23,9 @@ public class GameOverUI : MonoBehaviour, ISaveLoad
 
     private void SetupUI(){
         gameObject.SetActive(!gameObject.activeInHierarchy);
+        Time.timeScale = 0; 
         coinsPreview.text = _saveData.Coins + GameManager.Instance.coins.Value.ToString();
         Save();
-
     }
 
     public void Save()
