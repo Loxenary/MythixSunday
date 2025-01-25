@@ -10,6 +10,8 @@ public class Enemy : ScriptableObject
     public float health;
     public int maxCoinDrop;
 
+    public GameObject enemyPrefab;
+
     [Header("Grid-Based Mechanics")]
     public int movementRange; // Number of tiles the enemy can move per turn
     public AttackType attackType;

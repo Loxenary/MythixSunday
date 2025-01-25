@@ -9,6 +9,7 @@ TagManager:
   - ALT
   - Enemy
   - PowerUP
+  - F4
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Objects
   - 
   - 
   - 

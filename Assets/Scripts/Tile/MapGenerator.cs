@@ -22,10 +22,24 @@ public class MapAndObjectGenerator : MonoBehaviour
     public int skipTilesRandomly = 5; // Skip tiles randomly to add variability
     private List<GameObject> placedObjects = new List<GameObject>(); // Track placed objects
 
+    public Transform objectsContainer;
+    
+
+    [Header("Spawn Point Settings")]
+
+    private GameObject ALTPlayer;
+    private GameObject F4Player;
+    public Transform spawnPointsContainer;
+
     void Start()
     {
+        ALTPlayer = GameObject.FindWithTag("ALT");
+        F4Player = GameObject.FindWithTag("F4");
+
         GenerateMap();
+        PlacePlayerRandomly();
         PlaceObjectsOnTiles();
+        CreateSpawnPoints();
     }
 
     void GenerateMap()
@@ -64,6 +78,63 @@ public class MapAndObjectGenerator : MonoBehaviour
         }
     }
 
+    void CreateSpawnPoints()
+    {
+        if (SpawnerManager.Instance.SpawnPointPrefab == null)
+        {
+            Debug.LogError("Spawn point prefab is not assigned!");
+            return;
+        }
+
+        List<Vector3Int> validTilePositions = new List<Vector3Int>();
+
+        // Find all valid tile positions
+        for (int x = 0; x < mapWidth; x++)
+        {
+            for (int y = 0; y < mapHeight; y++)
+            {
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                if (tilemap.HasTile(tilePosition))
+                {
+                    validTilePositions.Add(tilePosition);
+                }
+            }
+        }
+
+        // Randomly select positions for spawn points
+        for (int i = 0; i < SpawnerManager.Instance.NumberOfSpawnPoints; i++)
+        {
+            if (validTilePositions.Count == 0)
+            {
+                Debug.LogWarning("Not enough valid tile positions to place spawn points!");
+                break;
+            }
+
+            int randomIndex = Random.Range(0, validTilePositions.Count);
+            Vector3Int spawnPosition = validTilePositions[randomIndex];
+            validTilePositions.RemoveAt(randomIndex); // Ensure no duplicate spawn points
+
+            // Instantiate the spawn point
+            Vector3 worldPosition = tilemap.GetCellCenterWorld(spawnPosition);
+            GameObject spawnPoint = Instantiate(SpawnerManager.Instance.SpawnPointPrefab, worldPosition, Quaternion.identity, spawnPointsContainer);
+
+            // Add the spawn point to the SpawnerManager
+            if (spawnPoint.TryGetComponent<SpawnPoint>(out SpawnPoint sp))
+            {
+                SpawnerManager.Instance.SpawnPoints.Add(sp);
+            }
+        }
+
+        Debug.Log($"Created {SpawnerManager.Instance.NumberOfSpawnPoints} spawn points.");
+    }
+
+    private void PlacePlayerRandomly(){
+        Vector3 worldPos = tilemap.GetCellCenterWorld(new Vector3Int(Random.Range(0, mapWidth), Random.Range(0, mapHeight),0));
+        ALTPlayer.transform.position = worldPos;
+        F4Player.transform.position = worldPos + new Vector3(4,4,0);
+
+    }
+
     void PlaceObjectsOnTiles()
     {
         int objectsPlaced = 0;
@@ -92,7 +163,6 @@ public class MapAndObjectGenerator : MonoBehaviour
 
                     // Calculate the minimum required distance to other objects
                     float minDistance = minDistanceMultiplier * objectArea;
-                    Debug.Log($"TEST: {minDistance} : {objectArea}");
 
                     // Convert tile position to world position (accounting for cell size)
                     Vector3 worldPosition = tilemap.GetCellCenterWorld(tilePosition);
@@ -101,14 +171,13 @@ public class MapAndObjectGenerator : MonoBehaviour
                     if (IsFarEnoughFromOtherObjects(worldPosition, minDistance))
                     {
                         // Place the object
-                        GameObject newObject = Instantiate(objectPrefab, worldPosition, Quaternion.identity);
+                        GameObject newObject = Instantiate(objectPrefab, worldPosition, Quaternion.identity, objectsContainer);
                         placedObjects.Add(newObject);
                         objectsPlaced++;
 
                         // Stop if we've placed the maximum number of objects
                         if (objectsPlaced >= maxObjects)
                         {
-                            Debug.Log($"Placed {objectsPlaced} objects on the map.");
                             return;
                         }
                     }
@@ -125,7 +194,7 @@ public class MapAndObjectGenerator : MonoBehaviour
         {
             if (Vector3.Distance(position, obj.transform.position) < minDistance)
             {
-                Debug.Log($"Object too close at {position}. Minimum distance required: {minDistance}");
+
                 return false;
             }
         }

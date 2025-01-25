@@ -7,10 +7,11 @@ public class GridManager : MonoBehaviour
 
     private Grid _grid;
 
-    private void Start()
-    {
-        _grid = GetComponent<Grid>();
+    public Grid Grid{
+        get{ return _grid; }
+        private set{ _grid = value; }
     }
+
     
     public float GridSize => _grid.cellSize.x;
 
@@ -21,6 +22,7 @@ public class GridManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(Instance);
+        _grid = GetComponent<Grid>();
     }
 
     public Grid GetGrid()
