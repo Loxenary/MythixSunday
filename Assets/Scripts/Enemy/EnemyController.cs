@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour
         if(rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
-            // rb.isKinematic = false;
         }
     }
 
@@ -36,8 +35,20 @@ public class EnemyController : MonoBehaviour
 
     private void ApplyKnockback(Vector2 direction, float force)
     {
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
+        float gridSize = GridManager.Instance.GridSize;
+
+        Vector2 knockbackDirection = direction.normalized;
+        Vector2 newPosition = (Vector2)transform.position + knockbackDirection * gridSize;
+        newPosition = SnapToGrid(newPosition);
+        transform.position = newPosition;
         Debug.Log("Mundur");
+    }
+
+    protected Vector2 SnapToGrid(Vector2 position){
+        Grid grid = GridManager.Instance.GetComponent<Grid>();
+        Vector3Int cellPosition = grid.WorldToCell(position);
+        Vector3 snappedPosition = grid.CellToWorld(cellPosition) + grid.cellSize / 2f;
+        return new Vector2(snappedPosition.x, snappedPosition.y);
     }
 
     private void Die()

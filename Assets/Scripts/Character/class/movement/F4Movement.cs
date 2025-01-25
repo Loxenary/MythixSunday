@@ -60,9 +60,5 @@ public class F4Movement : MovementBase
                 Debug.LogWarning("EnemyController Not Found.");
             }
         }
-        else if (entity.CompareTag("ALT"))
-        {
-            GameManager.Instance.ReduceLives(1);
-        }
     }
 }
