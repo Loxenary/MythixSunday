@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
     }
 
     private void OnPlayButtonClicked(){
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene((int)SceneEnum.GAME);
     }
 
     //Turn on only the selected Button

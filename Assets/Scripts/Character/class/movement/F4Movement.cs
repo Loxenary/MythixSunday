@@ -53,6 +53,7 @@ public class F4Movement : MovementBase
             {
                 Vector2 knockbackDirection = (entity.transform.position - transform.position).normalized;
                 enemyController.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+                
                 Debug.Log("Kena");
             }
             else

@@ -10,6 +10,8 @@ public class EnemyMovement : MovementBase
 
     private float _nextMoveTime;
 
+    private Indicator _enemyIndicator;
+
     private float _gridSize; 
 
     private void Start(){
@@ -24,7 +26,7 @@ public class EnemyMovement : MovementBase
         if (Time.time >= _nextMoveTime && !_isMoving)
         {
             
-            // Choose a random direction
+        // Choose a random direction
             Vector2 randomDirection = GetRandomDirection();
             Vector2 newPosition = new Vector2(
                 transform.position.x + randomDirection.x * _gridSize,
@@ -35,8 +37,9 @@ public class EnemyMovement : MovementBase
             _targetPosition = SnapToGrid(newPosition);
 
             // Show the red indicator at the target position
-            // ShowIndicator(_targetPosition);
-            IndicatorManager.Instance.ShowMovementIndicator(_targetPosition, enemyData);
+            
+            ShowIndicator(_targetPosition);
+            // IndicatorManager.Instance.ShowMovementIndicator(_targetPosition, enemyData);
             // StartCoroutine(ChangeIndicatorColor(enemyData.movementIndicatorPrefab));
 
             // Start moving after the indicator duration
@@ -70,45 +73,20 @@ public class EnemyMovement : MovementBase
         };
     }
 
-    //     private void ShowIndicator(Vector2 position)
-    // {
-    //     // Instantiate the indicator at the target position
-    //     GameObject indicator = Instantiate(IndicatorPrefab, position, Quaternion.identity);
-        
+        private void ShowIndicator(Vector2 position)
+    {
+        Debug.Log("IS THIS CALLED");
+        GameObject obj = Instantiate(enemyData.movementIndicatorPrefab, position, Quaternion.identity);
+        _enemyIndicator = obj.GetComponent<Indicator>();
 
-    //     // Destroy the indicator after the specified duration
-    //     StartCoroutine(ChangeIndicatorColor(indicator));
-    // }
-
-    // private IEnumerator ChangeIndicatorColor(GameObject indicator){
-    //     Debug.Log(indicator);
-    //     SpriteRenderer indicatorRenderer = indicator.GetComponent<SpriteRenderer>();
-    //     float elapsedTime = 0f;
-
-    //     Color startColor = new Color(1f,0,0,0/5f);
-    //     Color endColor = new (1f,0,0,1f);
-
-    //      while (elapsedTime < IndicatorDuration)
-    //     {
-    //         // Interpolate the color based on the elapsed time
-    //         float t = elapsedTime / IndicatorDuration;
-    //         indicatorRenderer.color = Color.Lerp(startColor, endColor, t);
-
-    //         // Wait for the next frame
-    //         elapsedTime += Time.deltaTime;
-    //         yield return null;
-
-    //         // Ensure the final color is set
-    //          if (indicator != null && indicatorRenderer != null)
-    //         {
-    //             indicatorRenderer.color = endColor;
-    //         }
-   
-    //     }
-        // // Destroy the indicator after the duration
-        // if (indicator != null)
-        // {
-        //     Destroy(indicator);
-        // }
-//     }
+        // Destroy the indicator after the specified duration
+        if (_enemyIndicator != null)
+        {
+            StartCoroutine(_enemyIndicator.Initialize(enemyData.movementIndicatorColor, enemyData.movementIndicatorDuration, enemyData.movementIndicatorPrefab));
+        }
+        else
+        {
+            Debug.LogWarning("Movement Indicator Prefab does not have an Indicator script attached.");
+        }
+    }
 }

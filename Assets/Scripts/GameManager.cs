@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public IntHealth playerLives;
     public Coins coins;
 
+    public Score Score;
+
     public Action OnGameOver;
 
     private void OnEnable()
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame(){
         playerLives.Set(3);
         playerHealth.Set(100f);
-        
+        Score.Set(0);
     }
 
     private void HandleLivesChanged(int newLives)
