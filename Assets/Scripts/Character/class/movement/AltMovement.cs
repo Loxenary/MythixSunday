@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class AltMovement : MovementBase
 {   
+    public float invincibilityDuration = 2f;
+
+    private bool isInvincible = false;
+    private float invincibilityTimer = 0f;
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
@@ -39,22 +49,77 @@ public class AltMovement : MovementBase
         {
             MoveToTarget();
         }
+
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0f)
+            {
+                DisableInvincibility();
+            }
+            else
+            {
+                if (spriteRenderer != null)
+                {
+                    float flashSpeed = 10f;
+                    float alpha = Mathf.PingPong(Time.time * flashSpeed, 1f);
+                    spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D entity)
     {
         if (entity.CompareTag("Enemy"))
         {
-            // TODO : Reduce health based on enemy attack value
-            EnemyController enemyController = entity.GetComponent<EnemyController>();
-            if (enemyController != null)
+            if (!isInvincible)
             {
-                GameManager.Instance.ReduceHealth(enemyController.damage);
+                EnemyController enemyController = entity.GetComponent<EnemyController>();
+                if (enemyController != null)
+                {
+                    GameManager.Instance.ReduceHealth(enemyController.damage);
+
+                    TriggerInvincibility();
+                }
+            }
+        }
+        else if (entity.CompareTag("F4"))
+        {
+            if (!isInvincible)
+            {
+                GameManager.Instance.ReduceLives(1);
+                TriggerInvincibility();
             }
         }
         else if (entity.CompareTag("PowerUP"))
         {
             // TODO : Enable PowerUP
+        }
+    }
+
+    public void TriggerInvincibility()
+    {
+        if (!isInvincible)
+        {
+            isInvincible = true;
+            invincibilityTimer = invincibilityDuration;
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            }
+        }
+    }
+
+    private void DisableInvincibility()
+    {
+        isInvincible = false;
+        invincibilityTimer = 0f;
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = new Color (1f, 1f, 1f, 1f);
         }
     }
 }
