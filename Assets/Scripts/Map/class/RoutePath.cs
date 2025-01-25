@@ -32,7 +32,7 @@ public class RoutePath : MonoBehaviour
         }
     }
 
-    private List<Vector3> TransformsToListVector3(List<Transform> listTrans){
+    public List<Vector3> TransformsToListVector3(List<Transform> listTrans){
         if(listTrans == null){}
         List<Vector3> points = new();
         foreach(Transform t in listTrans){

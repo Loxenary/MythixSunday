@@ -4,20 +4,11 @@ public  class BaseKey : MonoBehaviour, IKey
 {    
     [SerializeField] private Character character;
     // =============================================
-    private bool isAttached = false;
-    // =============================================
-
     public Character Character{
         get{ return character; }
         set{ character = value; }
     }
 
-    // =============================================
-    public bool IsAttached
-    {
-        get { return isAttached; }
-        set { isAttached = value; }
-    }
     // =============================================
 
     public void IncreaseSpeed(float speed){

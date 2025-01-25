@@ -17,6 +17,9 @@ public class Movement : MonoBehaviour
     private List<Transform> _pathPoints;
     private Vector3 targetPosition;    // Current target position
 
+    private float _MovementSlower = 0.4f;
+    
+
     public void Initialize(List<Transform> pathPoints){
         if (pathPoints == null || pathPoints.Count == 0)
         {
@@ -44,10 +47,9 @@ public class Movement : MonoBehaviour
 
     private bool CanMove()
     {
-        if (character.IsAttached)
-        {
-            return false;
-        }
+        // if (character is NormalKey normalKey && normalKey.IsAttached){
+        //     return false;
+        // }
         // Add any conditions for movement here (e.g., game state, key state)
         if(_pathPoints == null || _pathPoints.Count == 0){
             return false;
@@ -58,7 +60,7 @@ public class Movement : MonoBehaviour
     private void MoveAlongPath()
     {  
         // Move towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, character.Character.MovementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, character.Character.MovementSpeed * _MovementSlower * Time.deltaTime);
 
         // Check if the key has reached the target position
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)

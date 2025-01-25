@@ -9,6 +9,9 @@ public class TroopsManager : MonoBehaviour
     public static List<Character> S_SpawnedCharacters = new();
     [SerializeField] private GameObject keyPrefab;
 
+    [SerializeField] private float FirstSpawnDurationOffset = 2f;
+    
+
     public RoutePath altPath;
     public RoutePath f4Path; 
 
@@ -32,10 +35,16 @@ public class TroopsManager : MonoBehaviour
             Debug.LogWarning("Key not setup yet");
             return;
         }
-        altTroop = new Troops(altMainKey, altPath);
-        f4Troop = new Troops(f4MainKey, f4Path);
+        altTroop = new Troops(altPath);
+        f4Troop = new Troops(f4Path);
         Movement altMovement = altMainKey.gameObject.GetComponent<Movement>();
         Movement f4Movement = f4MainKey.gameObject.GetComponent<Movement>();
+
+        altMainKey.SetTroops(altTroop);
+        f4MainKey.SetTroops(f4Troop);
+
+        altMainKey.Character.ResetSpeed();
+        f4MainKey.Character.ResetSpeed();
 
         if(!altMovement || !f4Movement){
             Debug.LogWarning("Movement script aren't set in the Keys");
@@ -54,6 +63,7 @@ public class TroopsManager : MonoBehaviour
     }
 
     private IEnumerator SpawnTroops(){
+        yield return new WaitForSeconds(FirstSpawnDurationOffset);
         while(true){
             int troopSize = Random.Range(1,6);
             for(int i = 0; i < troopSize; i++){

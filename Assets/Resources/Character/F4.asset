@@ -15,3 +15,4 @@ MonoBehaviour:
   KeyCode: 122
   LeftDirectionIcon: {fileID: 0}
   RightDirectionIcon: {fileID: 0}
+  DefaultMovementSpeed: 0

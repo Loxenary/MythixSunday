@@ -9,7 +9,7 @@ public class Character : ScriptableObject
 
     public IntHealth Health = new IntHealth(1);
     private float _moveSpeed = 1; 
-    private float _defaultMoveSpeed =  1;
+    public float DefaultMovementSpeed =  1;
 
     public float MovementSpeed{
         get{return _moveSpeed;}
@@ -17,8 +17,9 @@ public class Character : ScriptableObject
             _moveSpeed = value;
         }
     }
+    
 
     public void ResetSpeed(){
-        _moveSpeed = _defaultMoveSpeed;
+        _moveSpeed = DefaultMovementSpeed;
     }
 }
