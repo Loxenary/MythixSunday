@@ -18,6 +18,7 @@ public class PlayerHealthUI : MonoBehaviour
     private void Start()
     {
         _health = GameManager.Instance.playerHealth;
+        _sliderHealth.maxValue = _health.Value;
         _sliderHealth.value = _health.Value;
         _health.OnValueChanged += UpdateHealthUI;
     }

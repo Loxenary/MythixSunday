@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
         Vector2 newPosition = (Vector2)transform.position + knockbackDirection * gridSize;
         newPosition = SnapToGrid(newPosition);
         transform.position = newPosition;
+        _enemyMovement.CancleMove();
         Debug.Log("Mundur");
     }
 

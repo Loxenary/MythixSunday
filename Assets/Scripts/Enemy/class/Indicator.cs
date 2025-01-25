@@ -6,8 +6,9 @@ using UnityEngine;
 public class Indicator : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-
     public Enemy EnemyData;
+
+    private bool IsReset = false;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class Indicator : MonoBehaviour
         Color startColor = new Color(color.r,color.g,color.b,0/5f);
         Color endColor = new (color.r,color.g,color.b,1f);
 
-        while (elapsedTime < duration)
+        while (elapsedTime < duration && !IsReset)
         {
             // Interpolate the color based on the elapsed time
             float t = elapsedTime / duration;
@@ -38,7 +39,12 @@ public class Indicator : MonoBehaviour
             }
    
         }
+        IsReset = false;
         Destroy(gameObject);
+    }
+
+    public void CancelMove(){
+        IsReset = true;
     }
 
     public void StartShowingIndicator(Color color, float duration, GameObject indicator){

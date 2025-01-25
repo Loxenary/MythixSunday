@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class EnemyMovement : MovementBase
     private float _nextMoveTime;
 
     private Indicator _enemyIndicator;
+
+    private System.Action OnResetMove;
 
     private float _gridSize; 
 
@@ -28,7 +31,7 @@ public class EnemyMovement : MovementBase
             
         // Choose a random direction
             Vector2 randomDirection = GetRandomDirection();
-            Vector2 newPosition = new Vector2(
+            Vector2 newPosition = new(
                 transform.position.x + randomDirection.x * _gridSize,
                 transform.position.y + randomDirection.y * _gridSize
             );
@@ -60,6 +63,14 @@ public class EnemyMovement : MovementBase
         _isMoving = true;
     }
 
+    public void CancleMove(){
+        _isMoving = false;
+        _nextMoveTime = 0; 
+        if(_enemyIndicator != null){
+           _enemyIndicator.CancelMove();
+        }  
+    }
+
     private Vector2 GetRandomDirection()
     {
         int direction = Random.Range(0, 4);
@@ -76,12 +87,13 @@ public class EnemyMovement : MovementBase
         private void ShowIndicator(Vector2 position)
     {
         Debug.Log("IS THIS CALLED");
-        GameObject obj = Instantiate(enemyData.movementIndicatorPrefab, position, Quaternion.identity);
+        GameObject obj = Instantiate(enemyData.movementIndicatorPrefab, position, Quaternion.identity, transform);
         _enemyIndicator = obj.GetComponent<Indicator>();
 
         // Destroy the indicator after the specified duration
         if (_enemyIndicator != null)
         {
+            
             StartCoroutine(_enemyIndicator.Initialize(enemyData.movementIndicatorColor, enemyData.movementIndicatorDuration, enemyData.movementIndicatorPrefab));
         }
         else
