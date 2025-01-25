@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -121,6 +122,14 @@ public class MapAndObjectGenerator : MonoBehaviour
             // Add the spawn point to the SpawnerManager
             if (spawnPoint.TryGetComponent<SpawnPoint>(out SpawnPoint sp))
             {
+                if(SpawnerManager.Instance == null){
+                    Debug.LogWarning("Spawner manager is null");
+                    return;
+                }else if(SpawnerManager.Instance.SpawnPoints == null){
+                    Debug.LogWarning("Spawn Points is null");
+                }else if(sp == null){
+                    Debug.LogWarning("New spawn point empty");
+                }
                 SpawnerManager.Instance.SpawnPoints.Add(sp);
             }
         }

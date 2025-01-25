@@ -35,6 +35,7 @@ public class SpawnerManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(Instance);
+        spawnPoints = new();
     }
 
     private void Start()
@@ -44,7 +45,7 @@ public class SpawnerManager : MonoBehaviour
 
         // Initialize the timer
         timer = spawnInterval;
-        spawnPoints = new();
+        
     }
 
     public void LoadSpawnPoints(){

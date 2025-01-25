@@ -16,7 +16,15 @@ public class PlayerLivesUi : MonoBehaviour
     }
 
     private void GenerateChild(int newValue){
-        for(int i = 0 ; i < newValue; i++ ){
+        // Destroy all existing children
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new children
+        for (int i = 0; i < newValue; i++)
+        {
             Instantiate(LivesIconPrefab, transform);
         }
     }
