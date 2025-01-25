@@ -27,7 +27,7 @@ public class PlayerCoinsUi : MonoBehaviour
     }
 
     private IEnumerator AnimateCoins(int newValue){
-        SmoothValueAnimator coinsAnimator = new(_coins.Value, newValue, AnimationDuration);
+        SmoothValueAnimator<int> coinsAnimator = new(_coins.Value, newValue, AnimationDuration);
 
         while(coinsAnimator.IsRunning()){
             coinsAnimator.Update();

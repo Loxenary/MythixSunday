@@ -10,6 +10,8 @@ public class Enemy : ScriptableObject
     public float health;
     public int maxCoinDrop;
 
+    public float gainScore;
+
     public GameObject enemyPrefab;
 
     [Header("Grid-Based Mechanics")]

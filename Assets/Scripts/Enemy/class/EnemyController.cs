@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Musuh Mati");
+        GameManager.Instance.Score.Add((long)_enemyMovement.enemyData.gainScore);
         Destroy(gameObject);
     }
 }

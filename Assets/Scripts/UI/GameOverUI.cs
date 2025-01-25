@@ -1,7 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class GameOverUI : MonoBehaviour, ISaveLoad
 {
 
@@ -13,7 +11,7 @@ public class GameOverUI : MonoBehaviour, ISaveLoad
     }
 
     public void MainMenu(){
-        SceneManager.LoadScene("MainMenu");
+        MySceneManager.Instance.LoadScene(SceneEnum.MAIN_MENU);
     }
 
     private void Start(){
