@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void SpendCoin(int amount)
     {
-        if (coins.Value >= amount)
+    if (coins.Value >= amount)
         {
             coins.Reduce(amount);
         }

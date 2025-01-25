@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth = enemyData.health;
         damage = enemyData.damage;
-        rb.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         if(rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
