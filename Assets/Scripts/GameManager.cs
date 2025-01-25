@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public IntHealth playerLives;
     public Coins coins;
 
+    public Action OnGameOver;
+
     private void OnEnable()
     {
         playerLives.OnValueChanged += HandleLivesChanged;
@@ -37,9 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerLives.Set(3);
-        playerHealth.Set(100f);
-        coins.Set(0);
+        RestartGame();
     }
 
     public void AddCoins(int amount)
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void SpendCoin(int amount)
     {
-        if (coins.Value >= amount)
+    if (coins.Value >= amount)
         {
             coins.Reduce(amount);
         }
@@ -65,12 +65,19 @@ public class GameManager : MonoBehaviour
         playerLives.Reduce(amount);
     }
 
+    public void RestartGame(){
+        playerLives.Set(3);
+        playerHealth.Set(100f);
+        
+    }
+
     private void HandleLivesChanged(int newLives)
     {
         Debug.Log($"nyawa barumu bung: {newLives}");
         if (newLives <= 0)
         {
             Debug.Log($"Kamu mati bung, sayang sekali");
+            OnGameOver?.Invoke();
         }
     }
 

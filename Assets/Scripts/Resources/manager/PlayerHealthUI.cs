@@ -1,23 +1,27 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    public FloatHealth health = new(100);
+    private FloatHealth _health;
     private Slider _sliderHealth;
+    private TextMeshProUGUI _healthPreview;
 
     [SerializeField] private float AnimationDuration;
  
     private void Awake()
     {
-        _sliderHealth = GetComponent<Slider>();
+        _sliderHealth = GetComponentInChildren<Slider>();
+        _healthPreview = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
     {
-        _sliderHealth.value = health.Value;
-        health.OnValueChanged += UpdateHealthUI;
+        _health = GameManager.Instance.playerHealth;
+        _sliderHealth.value = _health.Value;
+        _health.OnValueChanged += UpdateHealthUI;
     }
 
     private void UpdateHealthUI(float newValue)
@@ -35,15 +39,17 @@ public class PlayerHealthUI : MonoBehaviour
         {
             healthAnimator.Update();
             _sliderHealth.value = healthAnimator.CurrentValue;
+            _healthPreview.text = healthAnimator.CurrentValue.ToString();
             yield return null; // Wait for the next frame
         }
 
         // Ensure the final value is set
         _sliderHealth.value = newValue;
+        _healthPreview.text = newValue.ToString();
     }
 
     private void OnDestroy()
     {
-        health.OnValueChanged -= UpdateHealthUI;
+        _health.OnValueChanged -= UpdateHealthUI;
     }
 }
