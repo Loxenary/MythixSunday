@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovementBase : MonoBehaviour
 {
-    private Vector2 _targetPosition;
+    protected Vector2 _targetPosition;
 
     protected bool _isMoving = false;
 
@@ -23,7 +23,7 @@ public class MovementBase : MonoBehaviour
         }
     } 
 
-    private Vector2 SnapToGrid(Vector2 position){
+    protected Vector2 SnapToGrid(Vector2 position){
         float gridSize = GridManager.Instance.GridSize;
         float snappedX = Mathf.Round(position.x / gridSize) * gridSize;
         float snappedY = Mathf.Round(position.y / gridSize) * gridSize;
