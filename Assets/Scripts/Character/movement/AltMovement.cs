@@ -13,4 +13,16 @@ public class AltMovement : MovementBase
             MoveToTarget();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D entity)
+    {
+        if (entity.CompareTag("Enemy"))
+        {
+            // TODO : Reduce health based on enemy attack value
+        }
+        else if (entity.CompareTag("PowerUP"))
+        {
+            // TODO : Enable PowerUP
+        }
+    }
 }

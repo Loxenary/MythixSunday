@@ -14,4 +14,16 @@ public class F4Movement : MovementBase
             MoveToTarget();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D entity)
+    {
+        if (entity.CompareTag("Enemy"))
+        {
+            // TODO : Attack Enemy based on F4 damage
+        }
+        else if (entity.CompareTag("ALT"))
+        {
+            // GameManager.Instance.ReduceLives(1);
+        }
+    }
 }
