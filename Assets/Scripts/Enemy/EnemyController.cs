@@ -4,7 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     public Enemy enemyData;
     private float currentHealth;
-    public float damage;
+    public float damage { get; private set;}
     private Rigidbody2D rb;
 
     private void Start()

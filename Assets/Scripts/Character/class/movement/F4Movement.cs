@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class F4Movement : MovementBase
 {
+    private float attackDamage = 10f;
+    public float knockbackForce = 5f;
     void Update()
     {
         // Check for key presses (not held down)
