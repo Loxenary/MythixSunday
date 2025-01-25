@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance { get; private set;}
+
+    public FloatHealth playerHealth;
+    public IntHealth playerLives;
+    public Coins coins;
 
     private void Awake()
     {   
@@ -16,23 +17,30 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // TODO : Initialize playerHealth and playerLives and coins
     }
 
-    private void OnEnable()
-    {   
-        // SaveEventManager.OnSaveRequested += SaveGame;
-        // SaveEventManager.OnLoadRequested += LoadGame;
-    }
-    private void OnDisable()
+    public void AddCoins(int amount)
     {
-        // SaveEventManager.OnSaveRequested -= SaveGame;
-        // SaveEventManager.OnLoadRequested -= LoadGame;
+        coins.Add(amount);
     }
 
-    #region Save and Load
-
-    public void SaveGame(){
-        
+    public void SpendCoin(int amount)
+    {
+        if (coins.Value >= amount)
+        {
+            coins.Reduce(amount);
+        }
     }
-    #endregion
+
+    public void ReduceHealth(float amount)
+    {
+        playerHealth.Reduce(amount);
+    }
+
+    public void ReduceLives(int amount)
+    {
+        playerLives.Reduce(amount);
+    }
 }

@@ -5,8 +5,8 @@ public class AltMovement : MovementBase
 {
     void Update(){
         if(!_isMoving){
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
+            _moveX = Input.GetAxisRaw("Horizontal");
+            _moveY= Input.GetAxisRaw("Vertical");
             Move();
         }
         if(_isMoving){
