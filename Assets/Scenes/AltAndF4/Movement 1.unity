@@ -3310,7 +3310,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberOfSpawnPoints: 20
   SpawnPointPrefab: {fileID: 5423200545311375217, guid: 754d84b0542a2d043a20f1f0671ff02b, type: 3}
-  spawnInterval: 5
+  spawnInterval: 10
+  enemyDataList:
+  - {fileID: 11400000, guid: 84bf02353961bd9459e0658fa40243c9, type: 2}
+  - {fileID: 11400000, guid: 4f97b47b48a75464a9b52026fb1de4eb, type: 2}
+  - {fileID: 11400000, guid: c03fa70e659f53f47aebe33f4067f878, type: 2}
+  - {fileID: 11400000, guid: 75bb2a6b1fe340a419b031f50263ea10, type: 2}
+  - {fileID: 11400000, guid: dd9b0b8bccbbbaa4a8def0d68e11a545, type: 2}
+  - {fileID: 11400000, guid: 4684fd04c4b362d44808df91b7a064e1, type: 2}
+  amountOfSpawned: 2
 --- !u!4 &1340038839
 Transform:
   m_ObjectHideFlags: 0
