@@ -4,137 +4,185 @@ using System.Collections;
 
 public class SpawnerManager : MonoBehaviour
 {
-    public static SpawnerManager Instance{
-        get;
-        private set;
-    }
-
+    public static SpawnerManager Instance { get; private set; }
 
     [Header("Spawner Settings")]
-    private List<SpawnPoint> spawnPoints; // List of spawn points
-    
-    public List<SpawnPoint> SpawnPoints{
-        get{
-            return spawnPoints;
-        }
-        set{
-            spawnPoints = value;
-        }
+    [Tooltip("List of spawn points.")]
+    private List<SpawnPoint> spawnPoints = new List<SpawnPoint>(); // Initialize to prevent null references
+
+    public List<SpawnPoint> SpawnPoints
+    {
+        get { return spawnPoints; }
+        set { spawnPoints = value; }
     }
 
+    [Tooltip("Number of spawn points to instantiate.")]
     public int NumberOfSpawnPoints = 20;
+
+    [Tooltip("Prefab for spawn points.")]
     public GameObject SpawnPointPrefab;
-    
+
+    [Tooltip("Time interval between spawns.")]
     public float spawnInterval = 10f; // Time between spawns
 
-    private List<Enemy> enemyDataList;
+    [Tooltip("List of enemy data.")]
+    public List<Enemy> enemyDataList; // Assign via Inspector
 
-    private int amountOfSpawned = 5;
+    [Tooltip("Number of enemies to spawn per spawn cycle.")]
+    public int amountOfSpawned = 5;
+
     private float timer;
 
-    private void Awake(){
-        if(Instance != null && Instance != this){
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
+            return;
         }
         Instance = this;
-        DontDestroyOnLoad(Instance);
-        spawnPoints = new();
+        DontDestroyOnLoad(gameObject);
+
+        InitializeSpawnPoints();
     }
 
     private void Start()
     {
-        // Load all EnemyData from the Resources folder
-        LoadEnemyData();
-
-        // Initialize the timer
-        timer = spawnInterval;
-        
+        // Optionally, start a spawning loop
+        StartCoroutine(SpawnEnemiesLoop());
     }
 
-    private void Update()
+    /// <summary>
+    /// Initializes spawn points either by finding existing ones or instantiating new ones.
+    /// </summary>
+    private void InitializeSpawnPoints()
     {
-        if(spawnPoints == null){
-            return;    
-        }
-        // Count down the timer
-        timer -= Time.deltaTime;
-
-        // Spawn an enemy when the timer reaches zero
-        if (timer <= 0f)
+        if (SpawnPointPrefab == null)
         {
-            SpawnEnemy();
-            timer = spawnInterval; // Reset the timer
+            Debug.LogError("SpawnPointPrefab is not assigned in SpawnerManager.");
+            return;
+        }
+
+        for (int i = 0; i < NumberOfSpawnPoints; i++)
+        {
+            Vector3 position = GetRandomSpawnPosition();
+            GameObject spawnPointObj = Instantiate(SpawnPointPrefab, position, Quaternion.identity);
+            SpawnPoint spawnPoint = spawnPointObj.GetComponent<SpawnPoint>();
+
+            if (spawnPoint != null)
+            {
+                spawnPoints.Add(spawnPoint);
+                Debug.Log($"Initialized SpawnPoint at {position}");
+            }
+            else
+            {
+                Debug.LogWarning("SpawnPointPrefab does not have a SpawnPoint component.");
+            }
         }
     }
 
-    private void LoadEnemyData()
+    /// <summary>
+    /// Generates a random position for spawn points.
+    /// </summary>
+    /// <returns>Random Vector3 position.</returns>
+    private Vector3 GetRandomSpawnPosition()
     {
-        // Load all EnemyData assets from the Resources/EnemyData folder
-        Enemy[] loadedData = Resources.LoadAll<Enemy>("Enemies");
+        // Define your spawn area boundaries here
+        float x = Random.Range(-10f, 10f);
+        float y = Random.Range(-10f, 10f);
+        return new Vector3(x, y, 0f);
+    }
 
-        if (loadedData != null && loadedData.Length > 0)
+    /// <summary>
+    /// Coroutine that handles the spawning loop.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine.</returns>
+    private IEnumerator SpawnEnemiesLoop()
+    {
+        while (true)
         {
-            enemyDataList = new List<Enemy>(loadedData);
-            Debug.Log($"Loaded {enemyDataList.Count} enemy data entries.");
-        }
-        else
-        {
-            Debug.LogError("No EnemyData found in Resources/EnemyData folder!");
+            SpawnEnemies();
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private void SpawnEnemy()
+    /// <summary>
+    /// Spawns enemies at each spawn point.
+    /// </summary>
+    private void SpawnEnemies()
     {
         if (spawnPoints.Count == 0)
         {
-            Debug.LogError("No spawn points assigned!");
+            Debug.LogError("No spawn points available to spawn enemies.");
             return;
         }
 
-        if (enemyDataList.Count == 0)
+        if (enemyDataList == null || enemyDataList.Count == 0)
         {
-            Debug.LogError("No enemy data loaded!");
+            Debug.LogError("Enemy data list is empty or not assigned.");
             return;
         }
 
-        DifficultyLevel difficulty = GameManager.Instance.Score.Difficulty();
+        DifficultyLevel currentDifficulty = GameManager.Instance.Score.Difficulty();
 
-        List<Enemy> unlockedEnemies = ScaledEnemyDifficulties().FindAll(e => e.unlockDifficulty <= difficulty);
+        foreach (SpawnPoint spawn in spawnPoints)
+        {
+            Enemy baseEnemy = enemyDataList[Random.Range(0, enemyDataList.Count)];
+            Enemy scaledEnemy = ScaleEnemyStats(baseEnemy, currentDifficulty);
 
-        // Randomly select a spawn point
-        foreach (SpawnPoint spawn in spawnPoints){
-            Enemy enemyData = unlockedEnemies[Random.Range(0, unlockedEnemies.Count)];            
-            StartCoroutine(StartSpawning(1, spawn,enemyData.enemyPrefab));
-            Debug.Log($"Spawned {enemyData.enemyName} at {spawn.spawnPosition.position}");    
-        }      
+            if (scaledEnemy.enemyPrefab != null)
+            {
+                StartCoroutine(StartSpawning(spawnInterval, spawn, scaledEnemy.enemyPrefab));
+                Debug.Log($"Spawned {scaledEnemy.enemyName} at {spawn.spawnPosition.position}");
+            }
+            else
+            {
+                Debug.LogWarning($"Enemy prefab for {scaledEnemy.enemyName} is not assigned.");
+            }
+        }
     }
 
-    private IEnumerator StartSpawning(float interval,SpawnPoint spawnPoint, GameObject enemyPrefab){
-        for(int i = 0 ; i < amountOfSpawned; i++){
+    /// <summary>
+    /// Coroutine to spawn a specified number of enemies with a delay.
+    /// </summary>
+    /// <param name="interval">Delay between each spawn.</param>
+    /// <param name="spawnPoint">Spawn point reference.</param>
+    /// <param name="enemyPrefab">Enemy prefab to spawn.</param>
+    /// <returns>IEnumerator for coroutine.</returns>
+    private IEnumerator StartSpawning(float interval, SpawnPoint spawnPoint, GameObject enemyPrefab)
+    {
+        for (int i = 0; i < amountOfSpawned; i++)
+        {
             spawnPoint.SpawnEnemy(enemyPrefab);
             yield return new WaitForSeconds(interval);
         }
     }
 
-    private Enemy ScaleEnemyStats(Enemy enemyData , DifficultyLevel difficulty){
+    /// <summary>
+    /// Scales enemy stats based on the current difficulty.
+    /// </summary>
+    /// <param name="enemyData">Base enemy data.</param>
+    /// <param name="difficulty">Current game difficulty.</param>
+    /// <returns>Scaled Enemy instance.</returns>
+    private Enemy ScaleEnemyStats(Enemy enemyData, DifficultyLevel difficulty)
+    {
+        if (enemyData == null)
+        {
+            Debug.LogError("Enemy data is null. Cannot scale stats.");
+            return null;
+        }
+
         Enemy scaledEnemy = Instantiate(enemyData);
 
-        // Scale stats based on difficulty
-        scaledEnemy.health *= enemyData.healthMultiplier * (int)difficulty;
-        scaledEnemy.damage *= enemyData.damageMultiplier * (int)difficulty;
-        scaledEnemy.moveDelay *= enemyData.moveDelayMultiplier / (int)difficulty; // Faster enemies at higher difficulty
-        scaledEnemy.maxCoinDrop = (int)(enemyData.maxCoinDrop * enemyData.coinDropMultiplier * (int)difficulty);
-        scaledEnemy.gainScore *= enemyData.scoreGainMultiplier * (int)difficulty;
+        // Ensure base stats are used for scaling
+        scaledEnemy.health = enemyData.baseHealth * enemyData.healthMultiplier * (int)difficulty;
+        scaledEnemy.damage = enemyData.baseDamage * enemyData.damageMultiplier * (int)difficulty;
+        scaledEnemy.moveDelay = enemyData.baseMoveDelay * enemyData.moveDelayMultiplier / Mathf.Max(1, (int)difficulty); // Prevent division by zero
+        scaledEnemy.maxCoinDrop = (int)(enemyData.baseMaxCoinDrop * enemyData.coinDropMultiplier * (int)difficulty);
+        scaledEnemy.gainScore = enemyData.baseGainScore * enemyData.scoreGainMultiplier * (int)difficulty;
+
+        Debug.Log($"Scaled Enemy '{scaledEnemy.enemyName}': Health={scaledEnemy.health}, Damage={scaledEnemy.damage}, MoveDelay={scaledEnemy.moveDelay}, MaxCoinDrop={scaledEnemy.maxCoinDrop}, GainScore={scaledEnemy.gainScore}");
 
         return scaledEnemy;
-    }
-
-    private List<Enemy> ScaledEnemyDifficulties(){
-        List<Enemy> enemies = new();
-        foreach(Enemy enemy in enemyDataList){
-            Enemy scaledEnemy = ScaleEnemyStats(enemy, GameManager.Instance.Score.Difficulty());
-            enemies.Add(scaledEnemy);
-        }
-        return enemies;
     }
 }

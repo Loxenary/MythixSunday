@@ -18,6 +18,11 @@ MonoBehaviour:
   health: 200
   maxCoinDrop: 200
   gainScore: 16000
+  baseMoveDelay: 1
+  baseDamage: 30
+  baseHealth: 200
+  baseMaxCoinDrop: 200
+  baseGainScore: 16000
   enemyPrefab: {fileID: 8315291733099852569, guid: 6c8ed525b829c5645b02b0d77a0dd1d9, type: 3}
   unlockDifficulty: 1
   healthMultiplier: 1

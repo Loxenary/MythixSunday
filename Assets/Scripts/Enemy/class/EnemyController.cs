@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     public float damage { get; private set;}
     private Rigidbody2D rb;
 
+    private bool isDead = false;
+
     private void Start()
     {
         _enemyMovement = this.GetComponent<EnemyMovement>();
@@ -55,10 +57,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+        
         GameManager.Instance.Score.Add((long)_enemyMovement.enemyData.gainScore);
-
         DropCoins();
-
         Destroy(gameObject);
     }
 

@@ -12,6 +12,13 @@ public class Enemy : ScriptableObject
 
     public float gainScore;
 
+    public float baseMoveDelay;
+    public float baseDamage;
+    public float baseHealth;
+    public int baseMaxCoinDrop;
+
+    public float baseGainScore;
+
     public GameObject enemyPrefab;
 
     [Header("Difficulty Scaling")]
