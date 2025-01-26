@@ -109,12 +109,14 @@ public class PauseUI : MonoBehaviour, ISaveLoad
     {
         AudioManager.Instance.SetMusicMasterVolume(volume);
         musicSlider.SliderVolumeChange(volume);
+        Save();
     }
 
     private void OnSFXVolumeChanged(float volume)
     {
         AudioManager.Instance.SetSFXMasterVolume(volume);
         sfxSlider.SliderVolumeChange(volume);
+        Save();
     }
 
     private void ToggleMusicMute()
@@ -145,11 +147,11 @@ public class PauseUI : MonoBehaviour, ISaveLoad
 
     public void GoToShop()
     {
-        MySceneManager.Instance.LoadScene(SceneEnum.SHOP);
+        MySceneManager.Instance.LoadSceneWithMusic(SceneEnum.SHOP, "ShopBGM");
     }
 
     public void MainMenu()
     {
-        MySceneManager.Instance.LoadScene(SceneEnum.MAIN_MENU);
+        MySceneManager.Instance.LoadSceneWithMusic(SceneEnum.MAIN_MENU, "MainMenuBGM");
     }
 }

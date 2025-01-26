@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Keyword D
   moveDelay: 1
   damage: 10
-  health: 40
+  health: 20
   maxCoinDrop: 50
   gainScore: 2000
   baseMoveDelay: 1

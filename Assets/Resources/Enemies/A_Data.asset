@@ -25,7 +25,7 @@ MonoBehaviour:
   baseGainScore: 500
   enemyPrefab: {fileID: 8315291733099852569, guid: 79728c392d4cb454a945117d2f6cf1e0, type: 3}
   unlockDifficulty: 0
-  healthMultiplier: 2
+  healthMultiplier: 1
   damageMultiplier: 1
   moveDelayMultiplier: 0.875
   coinDropMultiplier: 3

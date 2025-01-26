@@ -135,7 +135,7 @@ public class SpawnerManager : MonoBehaviour
                 
                 spawn.SpawnEnemy(scaledEnemy.enemyPrefab);
 
-                Debug.Log($"Spawned {scaledEnemy.enemyName} at {spawn.spawnPosition.position}");
+                Debug.Log($"Spawned {scaledEnemy.enemyName} at {spawn.spawnPosition.position} WITH HEALTH {scaledEnemy.health}");
             }
             else
             {
@@ -169,11 +169,11 @@ public class SpawnerManager : MonoBehaviour
         Enemy scaledEnemy = Instantiate(enemyData);
 
         // Ensure base stats are used for scaling
-        scaledEnemy.health = enemyData.baseHealth * enemyData.healthMultiplier * (int)difficulty;
-        scaledEnemy.damage = enemyData.baseDamage * enemyData.damageMultiplier * (int)difficulty;
-        scaledEnemy.moveDelay = enemyData.baseMoveDelay * enemyData.moveDelayMultiplier / Mathf.Max(1, (int)difficulty); // Prevent division by zero
-        scaledEnemy.maxCoinDrop = (int)(enemyData.baseMaxCoinDrop * enemyData.coinDropMultiplier * (int)difficulty);
-        scaledEnemy.gainScore = enemyData.baseGainScore * enemyData.scoreGainMultiplier * (int)difficulty;
+        scaledEnemy.health = enemyData.health  * (int)difficulty + 1;
+        scaledEnemy.damage = enemyData.damage * (int)difficulty + 1;
+        scaledEnemy.moveDelay = enemyData.moveDelay; // Prevent division by zero
+        scaledEnemy.maxCoinDrop = (int)(enemyData.maxCoinDrop *( (int)difficulty) + 1);
+        scaledEnemy.gainScore *= (int)difficulty + 1;
 
         Debug.Log($"Scaled Enemy '{scaledEnemy.enemyName}': Health={scaledEnemy.health}, Damage={scaledEnemy.damage}, MoveDelay={scaledEnemy.moveDelay}, MaxCoinDrop={scaledEnemy.maxCoinDrop}, GainScore={scaledEnemy.gainScore}");
 

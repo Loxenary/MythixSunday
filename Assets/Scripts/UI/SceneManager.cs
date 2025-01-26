@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,5 +22,11 @@ public class MySceneManager : MonoBehaviour
     ){
         SceneManager.LoadScene((int)sceneEnum);
     }   
-    
+
+    public void LoadSceneWithMusic(SceneEnum sceneEnum, string music){
+        LoadScene(sceneEnum);
+        AudioManager.Instance.PlayMusic(music);
+    }    
 }
+
+

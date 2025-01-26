@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame(){
         ResourcesSaveData userData = SaveLoadManager.Load<ResourcesSaveData>();
+        playerLives = new IntHealth(0);
+        playerHealth = new FloatHealth(0);
         if(userData == null || userData == default || userData.Lives == 0 || userData.Health == 0 ){
             playerLives.Set(1);
             playerHealth.Set(100);
@@ -74,8 +76,8 @@ public class GameManager : MonoBehaviour
             playerHealth.Set(userData.Health);
         }
 
-        coins.Set(0);
-        Score.Set(0);
+        coins = new Coins(0);
+        Score = new Score(0);
     }
 
     private void HandleLivesChanged(int newLives)
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Kamu mati bung, sayang sekali");
             OnGameOver?.Invoke();
+            AudioManager.Instance.PlayMusic("GameOverBGM",true,1,true);
         }
     }
 

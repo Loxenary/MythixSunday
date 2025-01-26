@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Keyword S
   moveDelay: 1
   damage: 30
-  health: 200
+  health: 100
   maxCoinDrop: 200
   gainScore: 16000
   baseMoveDelay: 1

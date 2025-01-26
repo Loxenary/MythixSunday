@@ -7,11 +7,11 @@ public class GameOverUI : MonoBehaviour, ISaveLoad
 
     private ResourcesSaveData _saveData;
     public void GoToShop(){
-        MySceneManager.Instance.LoadScene(SceneEnum.SHOP);
+        MySceneManager.Instance.LoadSceneWithMusic(SceneEnum.SHOP, "ShopBGM");
     }
 
     public void MainMenu(){
-        MySceneManager.Instance.LoadScene(SceneEnum.MAIN_MENU);
+        MySceneManager.Instance.LoadSceneWithMusic(SceneEnum.MAIN_MENU, "MainMenuBGM");
     }
 
     private void Start(){
@@ -20,15 +20,31 @@ public class GameOverUI : MonoBehaviour, ISaveLoad
     }
 
     private void SetupUI(){
+        Load();
         gameObject.SetActive(!gameObject.activeInHierarchy);
         Time.timeScale = 0; 
-        coinsPreview.text = _saveData.Coins + GameManager.Instance.coins.Value.ToString();
+        if(coinsPreview == null){
+            coinsPreview = GetComponentInChildren<TextMeshProUGUI>();
+        }
+        if(_saveData == default || _saveData == null){
+            coinsPreview.text = GameManager.Instance.coins.Value.ToString();
+    }else{
+            coinsPreview.text = _saveData.Coins + GameManager.Instance.coins.Value.ToString();
+        }
+        
         Save();
     }
 
     public void Save()
     {
-        _saveData.Coins = GameManager.Instance.coins.Value  + _saveData.Coins;
+        if(_saveData == default || _saveData == null){
+            _saveData = new ResourcesSaveData{
+                Coins = GameManager.Instance.coins.Value,
+            };
+        }else{
+            _saveData.Coins = GameManager.Instance.coins.Value  + _saveData.Coins;
+        }
+        
         
         SaveLoadManager.Save(_saveData);
     }

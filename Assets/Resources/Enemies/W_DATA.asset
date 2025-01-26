@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Keyword W
   moveDelay: 1
   damage: 200
-  health: 5000
+  health: 1000
   maxCoinDrop: 5000
   gainScore: 8192000
   baseMoveDelay: 1

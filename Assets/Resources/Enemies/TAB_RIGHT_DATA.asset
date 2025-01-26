@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Keyword Tab Right
   moveDelay: 1
   damage: 500
-  health: 15000
+  health: 2000
   maxCoinDrop: 15000
   gainScore: 256000
   baseMoveDelay: 1

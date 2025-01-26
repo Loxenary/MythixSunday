@@ -46,13 +46,12 @@ public class AudioManager : MonoBehaviour
 
         // Ensure this GameObject persists across scene loads
         DontDestroyOnLoad(gameObject);
-
+        Load();
         // Initialize dictionaries
         _musicDictionary = new Dictionary<string, Music>();
         _soundEffectDictionary = new Dictionary<string, SoundEffect>();
         _sfxCooldownDictionary = new Dictionary<string, SFXCooldown>();
-        SetMasterVolume(100);
-        SetMusicMasterVolume(100);
+        
         // Initialize music tracks and sound effects
         InitializeMusicTracks();
         InitializeSoundEffects();
@@ -95,7 +94,7 @@ public class AudioManager : MonoBehaviour
     #region Music Management
     public void PlayMusic(string key, bool loop = true, float? volume = -1, bool? forceChangeMusic = false)
     {
-        if (MusicSource.isPlaying && (forceChangeMusic ?? false))
+        if (MusicSource.isPlaying && (!forceChangeMusic ?? false))
         {
             return; // Do nothing if music is already playing and force change isn't requested
         }
@@ -103,7 +102,7 @@ public class AudioManager : MonoBehaviour
         if (_musicDictionary.TryGetValue(key, out Music music))
         {
             // Set volume and play the music
-            float vol = (volume ?? music.ClipVolume) * Music.MusicMasterVolume * Audio.MasterVolume;
+            float vol = music.ClipVolume;
             MusicSource.clip = music.AudioClip;
             MusicSource.volume = vol;
             MusicSource.Play();
@@ -175,6 +174,13 @@ public class AudioManager : MonoBehaviour
     {
         SoundEffect.SoundEffectMasterVolume = volume;
     }
+
+    public void Load(){
+        SettingsSaveData data = SaveLoadManager.Load<SettingsSaveData>();
+        SetMusicMasterVolume(data.MusicVolume);
+        SetSFXMasterVolume(data.SFXVolume);
+    }
+
     #endregion
 
     #region Additional Methods

@@ -228,4 +228,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionCheckRadius: 0.4
-  enemyData: {fileID: 11400000, guid: 4684fd04c4b362d44808df91b7a064e1, type: 2}
+  enemyData: {fileID: 11400000, guid: dd9b0b8bccbbbaa4a8def0d68e11a545, type: 2}

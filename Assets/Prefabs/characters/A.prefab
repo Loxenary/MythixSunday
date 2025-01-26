@@ -131,7 +131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.41, y: 8.840639}
+    oldSize: {x: 1.4016666, y: 1.4734399}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -228,4 +228,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionCheckRadius: 0.4
-  enemyData: {fileID: 11400000, guid: 4684fd04c4b362d44808df91b7a064e1, type: 2}
+  enemyData: {fileID: 11400000, guid: 84bf02353961bd9459e0658fa40243c9, type: 2}

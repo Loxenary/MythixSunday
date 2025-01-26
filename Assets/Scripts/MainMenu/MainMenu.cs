@@ -11,19 +11,19 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [Header("Menu Panels")]
-    [SerializeField] private GameObject mainMenuPanel;
-    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] public GameObject mainMenuPanel;
+    [SerializeField] public GameObject settingsPanel;
 
     [Header("Buttons")]
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button settingButton;
-    [SerializeField] private Button storeButton;
+    [SerializeField] public Button startButton;
+    [SerializeField] public Button settingButton;
+    [SerializeField] public Button storeButton;
 
-    [SerializeField] private PauseUI pauseUI;
+    [SerializeField] public PauseUI pauseUI;
 
-    private  readonly List<GameObject> _panels = new();
+    public  readonly List<GameObject> _panels = new();
 
-    private void Start(){
+    public void Start(){
         
         _panels.Add(mainMenuPanel);
         _panels.Add(settingsPanel);
@@ -37,12 +37,12 @@ public class MainMenu : MonoBehaviour
         SetActivePanel(mainMenuPanel);
     }
 
-    private void OnPlayButtonClicked(){
-        SceneManager.LoadScene((int)SceneEnum.GAME);
+    public void OnPlayButtonClicked(){
+        MySceneManager.Instance.LoadSceneWithMusic( SceneEnum.GAME,"Stage1BGM");
     }
 
     //Turn on only the selected Button
-    private void SetActivePanel(GameObject panel){
+    public void SetActivePanel(GameObject panel){
         foreach(GameObject obj in _panels){
             
             if(obj == panel){
@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void OpenStore(){
-        SceneManager.LoadScene((int)SceneEnum.SHOP);
+    public void OpenStore(){
+        MySceneManager.Instance.LoadSceneWithMusic( SceneEnum.SHOP,"ShopBGM");
     }
 }

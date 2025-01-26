@@ -34,7 +34,7 @@ public class StoraManager : MonoBehaviour
     }
 
     private void BackToMainMenu(){
-        MySceneManager.Instance.LoadScene(SceneEnum.MAIN_MENU);
+        MySceneManager.Instance.LoadSceneWithMusic(SceneEnum.MAIN_MENU, "MainMenuBGM");
     }
 
     private void OpenStatsPage(){
