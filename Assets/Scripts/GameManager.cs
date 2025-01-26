@@ -92,4 +92,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Uang Anda saat ini: {newCoins}T");
     }
+
+    private void HandleScoreChanged(long newScore){
+        
+    }
 }

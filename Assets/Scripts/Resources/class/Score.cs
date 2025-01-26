@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+
 [Serializable]
 public class Score : Resource<long>
 {
@@ -9,26 +11,26 @@ public class Score : Resource<long>
 
     }
 
-    public int Difficulty(){
+    public DifficultyLevel Difficulty(){
         if (Value >= 1000000000000) // 1 trillion (1t)
         {
-            return 5;
+            return DifficultyLevel.Extreme;
         }
         else if (Value >= 1000000000) // 1 billion (1b)
         {
-            return 4;
+            return DifficultyLevel.VeryHard;
         }
         else if (Value >= 1000000) // 1 million (1m)
         {
-            return 3;
+            return DifficultyLevel.Hard;
         }
         else if (Value >= 1000) // 1 thousand (1k)
         {
-            return 2;
+            return DifficultyLevel.Medium;
         }
         else
         {
-            return 1; // No suffix for values less than 1000
+            return DifficultyLevel.Easy; // No suffix for values less than 1000
         }
     }
 }

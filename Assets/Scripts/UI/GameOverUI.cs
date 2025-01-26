@@ -6,8 +6,8 @@ public class GameOverUI : MonoBehaviour, ISaveLoad
     [SerializeField] private TextMeshProUGUI coinsPreview;
 
     private ResourcesSaveData _saveData;
-    public void RestartGame(){
-        GameManager.Instance.RestartGame();
+    public void GoToShop(){
+        MySceneManager.Instance.LoadScene(SceneEnum.SHOP);
     }
 
     public void MainMenu(){

@@ -14,6 +14,14 @@ public class Enemy : ScriptableObject
 
     public GameObject enemyPrefab;
 
+    [Header("Difficulty Scaling")]
+    public DifficultyLevel unlockDifficulty  = DifficultyLevel.Easy;
+    public float healthMultiplier = 1f;
+    public float damageMultiplier = 1f;
+    public float moveDelayMultiplier = 1f;
+    public float coinDropMultiplier = 1f;
+    public float scoreGainMultiplier = 1f;
+
     [Header("Grid-Based Mechanics")]
     public int movementRange; // Number of tiles the enemy can move per turn
     public AttackType attackType;

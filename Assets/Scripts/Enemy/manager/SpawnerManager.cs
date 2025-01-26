@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SpawnerManager : MonoBehaviour
 {
@@ -24,9 +25,11 @@ public class SpawnerManager : MonoBehaviour
     public int NumberOfSpawnPoints = 20;
     public GameObject SpawnPointPrefab;
     
-    public float spawnInterval = 5f; // Time between spawns
+    public float spawnInterval = 10f; // Time between spawns
 
     private List<Enemy> enemyDataList;
+
+    private int amountOfSpawned = 5;
     private float timer;
 
     private void Awake(){
@@ -46,10 +49,6 @@ public class SpawnerManager : MonoBehaviour
         // Initialize the timer
         timer = spawnInterval;
         
-    }
-
-    public void LoadSpawnPoints(){
-
     }
 
     private void Update()
@@ -98,11 +97,44 @@ public class SpawnerManager : MonoBehaviour
             return;
         }
 
+        DifficultyLevel difficulty = GameManager.Instance.Score.Difficulty();
+
+        List<Enemy> unlockedEnemies = ScaledEnemyDifficulties().FindAll(e => e.unlockDifficulty <= difficulty);
+
         // Randomly select a spawn point
         foreach (SpawnPoint spawn in spawnPoints){
-            Enemy enemyData = enemyDataList[Random.Range(0, enemyDataList.Count)];
-            spawn.SpawnEnemy(enemyData.enemyPrefab);
+            Enemy enemyData = unlockedEnemies[Random.Range(0, unlockedEnemies.Count)];            
+            StartCoroutine(StartSpawning(1, spawn,enemyData.enemyPrefab));
             Debug.Log($"Spawned {enemyData.enemyName} at {spawn.spawnPosition.position}");    
         }      
+    }
+
+    private IEnumerator StartSpawning(float interval,SpawnPoint spawnPoint, GameObject enemyPrefab){
+        for(int i = 0 ; i < amountOfSpawned; i++){
+            spawnPoint.SpawnEnemy(enemyPrefab);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    private Enemy ScaleEnemyStats(Enemy enemyData , DifficultyLevel difficulty){
+        Enemy scaledEnemy = Instantiate(enemyData);
+
+        // Scale stats based on difficulty
+        scaledEnemy.health *= enemyData.healthMultiplier * (int)difficulty;
+        scaledEnemy.damage *= enemyData.damageMultiplier * (int)difficulty;
+        scaledEnemy.moveDelay *= enemyData.moveDelayMultiplier / (int)difficulty; // Faster enemies at higher difficulty
+        scaledEnemy.maxCoinDrop = (int)(enemyData.maxCoinDrop * enemyData.coinDropMultiplier * (int)difficulty);
+        scaledEnemy.gainScore *= enemyData.scoreGainMultiplier * (int)difficulty;
+
+        return scaledEnemy;
+    }
+
+    private List<Enemy> ScaledEnemyDifficulties(){
+        List<Enemy> enemies = new();
+        foreach(Enemy enemy in enemyDataList){
+            Enemy scaledEnemy = ScaleEnemyStats(enemy, GameManager.Instance.Score.Difficulty());
+            enemies.Add(scaledEnemy);
+        }
+        return enemies;
     }
 }

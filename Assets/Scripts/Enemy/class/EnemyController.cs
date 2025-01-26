@@ -58,4 +58,9 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.Score.Add((long)_enemyMovement.enemyData.gainScore);
         Destroy(gameObject);
     }
+
+
+    private void SetStats(Enemy enemyStats){
+        
+    }
 }

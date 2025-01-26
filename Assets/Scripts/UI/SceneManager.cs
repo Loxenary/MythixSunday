@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public enum SceneEnum{
     MAIN_MENU = 1,
     GAME = 2,
-    GAME_OVER = 3,
+    SHOP = 3,
 }
 public class MySceneManager : MonoBehaviour
 {
