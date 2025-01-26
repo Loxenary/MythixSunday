@@ -17,8 +17,9 @@ public class MainMenu : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button settingButton;
-    [SerializeField] private Button exitButton;
-    [SerializeField] private Button backButton;
+    [SerializeField] private Button storeButton;
+
+    [SerializeField] private PauseUI pauseUI;
 
     private  readonly List<GameObject> _panels = new();
 
@@ -26,11 +27,13 @@ public class MainMenu : MonoBehaviour
         
         _panels.Add(mainMenuPanel);
         _panels.Add(settingsPanel);
-        
+        AudioManager.Instance.PlayMusic("MainMenuBGM");
         startButton.onClick.AddListener(OnPlayButtonClicked);
-        settingButton.onClick.AddListener(ShowSettings);
-        exitButton.onClick.AddListener(ExitGame);
-        backButton.onClick.AddListener(ShowMainMenu);
+        settingButton.onClick.AddListener(() => {
+            settingsPanel.SetActive(true);
+            pauseUI.OpenSettings();
+        });
+        storeButton.onClick.AddListener(OpenStore);
         SetActivePanel(mainMenuPanel);
     }
 
@@ -49,17 +52,8 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
-    
 
-    private void ShowMainMenu(){
-        SetActivePanel(mainMenuPanel);
-    }
-
-    private void ShowSettings(){
-        SetActivePanel(settingsPanel);
-    }
-
-    private void ExitGame(){
-        Application.Quit();
+    private void OpenStore(){
+        SceneManager.LoadScene((int)SceneEnum.SHOP);
     }
 }

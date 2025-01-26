@@ -2,8 +2,20 @@ using UnityEngine;
 
 public class F4Movement : MovementBase
 {
-    private float attackDamage = 10f;
+    public float AttackDamage{
+        get;
+        set;
+    }
     public float knockbackForce = 5f;
+
+    private void Start(){
+        DamageData damageData = SaveLoadManager.Load<DamageData>();
+        if(damageData != null && damageData != default){
+            AttackDamage = damageData.DamageDealt;
+        }else{
+            AttackDamage = 10f;
+        }
+    }
     void Update()
     {
         // Check for key presses (not held down)
@@ -52,7 +64,7 @@ public class F4Movement : MovementBase
             if (enemyController != null)
             {
                 Vector2 knockbackDirection = (entity.transform.position - transform.position).normalized;
-                enemyController.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+                enemyController.TakeDamage(AttackDamage, knockbackDirection, knockbackForce);
                 
                 Debug.Log("Kena");
             }

@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 
 public enum SceneEnum{
-    MAIN_MENU = 1,
-    GAME = 2,
-    SHOP = 3,
+    MAIN_MENU = 0,
+    GAME = 1,
+    SHOP = 2,
 }
 public class MySceneManager : MonoBehaviour
 {

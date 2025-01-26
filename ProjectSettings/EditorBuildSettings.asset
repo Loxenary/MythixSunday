@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1800ca7bc4ee9254a8eacf64ad0eeb06
+  - enabled: 1
     path: Assets/Scenes/AltAndF4/Movement.unity
     guid: 23993b57bbdc14d4a95eb60c41a5ba4d
+  - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: 5f5bd2b21802f9d42898d60c7df16d1d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

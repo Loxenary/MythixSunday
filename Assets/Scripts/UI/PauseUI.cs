@@ -46,11 +46,8 @@ public class PauseUI : MonoBehaviour, ISaveLoad
     [SerializeField] private SettingsSlider musicSlider;
     [SerializeField] private SettingsSlider sfxSlider;
 
-    private AudioManager _audioManager;
-
     private void Start()
     {
-        _audioManager = AudioManager.Instance;
 
         // Add listeners to buttons
         _BackToMenu.onClick.AddListener(MainMenu);
@@ -71,8 +68,8 @@ public class PauseUI : MonoBehaviour, ISaveLoad
 
     public void OpenSettings()
     {
-        Load();
         gameObject.SetActive(true);
+        Load();
     }
 
     public void CloseSettings()
@@ -98,9 +95,9 @@ public class PauseUI : MonoBehaviour, ISaveLoad
         {
             musicSlider.Slider.value = data.MusicVolume;
             sfxSlider.Slider.value = data.SFXVolume;
-            _audioManager.SetMasterVolume(data.MasterVolume);
-            _audioManager.SetMusicMasterVolume(data.MusicVolume);
-            _audioManager.SetSFXMasterVolume(data.SFXVolume);
+            AudioManager.Instance.SetMasterVolume(data.MasterVolume);
+            AudioManager.Instance.SetMusicMasterVolume(data.MusicVolume);
+            AudioManager.Instance.SetSFXMasterVolume(data.SFXVolume);
 
             // Update slider visuals
             musicSlider.SliderVolumeChange(data.MusicVolume);
@@ -110,13 +107,13 @@ public class PauseUI : MonoBehaviour, ISaveLoad
 
     private void OnMusicVolumeChanged(float volume)
     {
-        _audioManager.SetMusicMasterVolume(volume);
+        AudioManager.Instance.SetMusicMasterVolume(volume);
         musicSlider.SliderVolumeChange(volume);
     }
 
     private void OnSFXVolumeChanged(float volume)
     {
-        _audioManager.SetSFXMasterVolume(volume);
+        AudioManager.Instance.SetSFXMasterVolume(volume);
         sfxSlider.SliderVolumeChange(volume);
     }
 

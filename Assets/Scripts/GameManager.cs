@@ -63,8 +63,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame(){
         ResourcesSaveData userData = SaveLoadManager.Load<ResourcesSaveData>();
-        playerLives.Set(userData.Lives);
-        playerHealth.Set(userData.Health);
+        if(userData == null || userData == default){
+            playerLives.Set(1);
+            playerHealth.Set(100);
+        }else{
+            playerLives.Set(userData.Lives);
+            playerHealth.Set(userData.Health);
+        }
+
         coins.Set(0);
         Score.Set(0);
     }
