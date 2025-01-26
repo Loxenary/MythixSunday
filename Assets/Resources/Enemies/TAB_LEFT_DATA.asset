@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Keyword Tab Left
   moveDelay: 1
-  damage: 10
-  health: 200
-  maxCoinDrop: 200
+  damage: 100
+  health: 1000
+  maxCoinDrop: 1000
+  gainScore: 256000
   enemyPrefab: {fileID: 8315291733099852569, guid: 7f556076e7c048c43bae441024c75801, type: 3}
+  unlockDifficulty: 2
+  healthMultiplier: 1
+  damageMultiplier: 1
+  moveDelayMultiplier: 1
+  coinDropMultiplier: 1
+  scoreGainMultiplier: 1
   movementRange: 0
   attackType: 0
   attackRange: 0

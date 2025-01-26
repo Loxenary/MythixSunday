@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Keyword A
   moveDelay: 1
-  damage: 10
-  health: 200
-  maxCoinDrop: 200
+  damage: 5
+  health: 10
+  maxCoinDrop: 5
+  gainScore: 500
   enemyPrefab: {fileID: 8315291733099852569, guid: 79728c392d4cb454a945117d2f6cf1e0, type: 3}
+  unlockDifficulty: 0
+  healthMultiplier: 2
+  damageMultiplier: 1
+  moveDelayMultiplier: 0.875
+  coinDropMultiplier: 3
+  scoreGainMultiplier: 3
   movementRange: 0
   attackType: 0
   attackRange: 0
@@ -26,5 +33,5 @@ MonoBehaviour:
   specialAbility: 0
   abilityRange: 0
   movementIndicatorPrefab: {fileID: 7625398167172743996, guid: 92db3b37672c37e42a07ec37fde352df, type: 3}
-  movementIndicatorColor: {r: 0, g: 0.94509804, b: 0.8661707, a: 1}
+  movementIndicatorColor: {r: 0.9748427, g: 0.26493, b: 0.2237845, a: 1}
   movementIndicatorDuration: 1

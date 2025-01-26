@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Keyword S
   moveDelay: 1
-  damage: 10
+  damage: 30
   health: 200
   maxCoinDrop: 200
+  gainScore: 16000
   enemyPrefab: {fileID: 8315291733099852569, guid: 6c8ed525b829c5645b02b0d77a0dd1d9, type: 3}
+  unlockDifficulty: 1
+  healthMultiplier: 1
+  damageMultiplier: 1
+  moveDelayMultiplier: 1
+  coinDropMultiplier: 1
+  scoreGainMultiplier: 1
   movementRange: 0
   attackType: 0
   attackRange: 0

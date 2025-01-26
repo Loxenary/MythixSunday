@@ -38,12 +38,6 @@ public class GameManager : MonoBehaviour
 
         // TODO : Initialize playerHealth and playerLives and coins based on saved data
     }
-
-    private void Start()
-    {
-        RestartGame();
-    }
-
     public void AddCoins(int amount)
     {
         coins.Add(amount);
@@ -68,8 +62,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void RestartGame(){
-        playerLives.Set(3);
-        playerHealth.Set(100f);
+        ResourcesSaveData userData = SaveLoadManager.Load<ResourcesSaveData>();
+        playerLives.Set(userData.Lives);
+        playerHealth.Set(userData.Health);
+        coins.Set(0);
         Score.Set(0);
     }
 
@@ -92,8 +88,5 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Uang Anda saat ini: {newCoins}T");
     }
-
-    private void HandleScoreChanged(long newScore){
-        
-    }
+    
 }

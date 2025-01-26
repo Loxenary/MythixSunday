@@ -27,7 +27,7 @@ public static class SaveLoadManager
         }
         else{
             Debug.LogWarning($"File not found at {filePath}. Returning default data.");
-            return data;
+            return default;
         }
     }
 }
