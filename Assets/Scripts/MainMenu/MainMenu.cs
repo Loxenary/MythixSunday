@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
         
         _panels.Add(mainMenuPanel);
         _panels.Add(settingsPanel);
-        AudioManager.Instance.PlayMusic("MainMenuBGM");
+        AudioManager.Instance.PlayMusic("MainMenuBGM",true,100);
         startButton.onClick.AddListener(OnPlayButtonClicked);
         settingButton.onClick.AddListener(() => {
             settingsPanel.SetActive(true);

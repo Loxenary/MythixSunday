@@ -51,7 +51,8 @@ public class AudioManager : MonoBehaviour
         _musicDictionary = new Dictionary<string, Music>();
         _soundEffectDictionary = new Dictionary<string, SoundEffect>();
         _sfxCooldownDictionary = new Dictionary<string, SFXCooldown>();
-
+        SetMasterVolume(100);
+        SetMusicMasterVolume(100);
         // Initialize music tracks and sound effects
         InitializeMusicTracks();
         InitializeSoundEffects();
