@@ -1,37 +1,25 @@
 fileFormatVersion: 2
-guid: d5330f69f0297144e81261c2cc4579a2
+guid: 81c9c72c06008504b861f10a41eb2522
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6560266727679690311
-    second: sfx bar full_0
+      213: 7675826601332790545
+    second: coin_0
   - first:
-      213: -3216308655142221877
-    second: sfx bar full_1
+      213: -675104096977794455
+    second: coin_1
   - first:
-      213: 7321575002554343335
-    second: sfx bar full_2
+      213: -4412926668834298731
+    second: coin_2
   - first:
-      213: -4766384859903948166
-    second: sfx bar full_3
+      213: -4862007459847594908
+    second: coin_3
   - first:
-      213: -4447232720124390116
-    second: sfx bar full_4
+      213: -7914957615168794202
+    second: coin_4
   - first:
-      213: 167361626527131572
-    second: sfx bar full_5
-  - first:
-      213: -5500559727365854711
-    second: sfx bar full_6
-  - first:
-      213: 2359155185517958628
-    second: sfx bar full_7
-  - first:
-      213: -3165502484680636964
-    second: sfx bar full_8
-  - first:
-      213: -7483956375976682150
-    second: sfx bar full_9
+      213: 2278881825021241808
+    second: coin_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sfx bar full_0
+      name: coin_0
       rect:
         serializedVersion: 2
-        x: 487
-        y: 558
-        width: 975
-        height: 241
+        x: 2413
+        y: 739
+        width: 185
+        height: 303
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9b976d04b2045f4a0800000000000000
-      internalID: -6560266727679690311
+      spriteID: 1155fe920a3068a60800000000000000
+      internalID: 7675826601332790545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sfx bar full_1
+      name: coin_1
       rect:
         serializedVersion: 2
-        x: 624
-        y: 789
-        width: 7
-        height: 6
+        x: 2647
+        y: 744
+        width: 254
+        height: 299
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc7cb32a1506d53d0800000000000000
-      internalID: -3216308655142221877
+      spriteID: 96a4a31966c81a6f0800000000000000
+      internalID: -675104096977794455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sfx bar full_2
+      name: coin_2
       rect:
         serializedVersion: 2
-        x: 667
-        y: 511
-        width: 23
-        height: 61
+        x: 2969
+        y: 740
+        width: 299
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7af91a76ca57b9560800000000000000
-      internalID: 7321575002554343335
+      spriteID: 594a84c439222c2c0800000000000000
+      internalID: -4412926668834298731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sfx bar full_3
+      name: coin_3
       rect:
         serializedVersion: 2
-        x: 335
-        y: 294
-        width: 43
-        height: 83
+        x: 3307
+        y: 739
+        width: 255
+        height: 303
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7a00aa29366addb0800000000000000
-      internalID: -4766384859903948166
+      spriteID: 46c1c7ca9fda68cb0800000000000000
+      internalID: -4862007459847594908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sfx bar full_4
+      name: coin_4
       rect:
         serializedVersion: 2
-        x: 352
-        y: 322
-        width: 6
-        height: 6
+        x: 3609
+        y: 736
+        width: 184
+        height: 307
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c15dd7b47614842c0800000000000000
-      internalID: -4447232720124390116
+      spriteID: 6a15797fbfb682290800000000000000
+      internalID: -7914957615168794202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sfx bar full_5
+      name: coin_5
       rect:
         serializedVersion: 2
-        x: 372
-        y: 300
-        width: 12
-        height: 22
+        x: 3854
+        y: 743
+        width: 56
+        height: 298
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,96 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b76e2a3386925200800000000000000
-      internalID: 167361626527131572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sfx bar full_6
-      rect:
-        serializedVersion: 2
-        x: 380
-        y: 293
-        width: 22
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 90ae98832161aa3b0800000000000000
-      internalID: -5500559727365854711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sfx bar full_7
-      rect:
-        serializedVersion: 2
-        x: 403
-        y: 292
-        width: 25
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4e591d254276db020800000000000000
-      internalID: 2359155185517958628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sfx bar full_8
-      rect:
-        serializedVersion: 2
-        x: 422
-        y: 302
-        width: 85
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd58ef00340e114d0800000000000000
-      internalID: -3165502484680636964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sfx bar full_9
-      rect:
-        serializedVersion: 2
-        x: 453
-        y: 314
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a5dd367e355a32890800000000000000
-      internalID: -7483956375976682150
+      spriteID: 0d92c7122f630af10800000000000000
+      internalID: 2278881825021241808
       vertices: []
       indices: 
       edges: []
@@ -359,17 +259,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      sfx bar full_0: -6560266727679690311
-      sfx bar full_1: -3216308655142221877
-      sfx bar full_2: 7321575002554343335
-      sfx bar full_3: -4766384859903948166
-      sfx bar full_4: -4447232720124390116
-      sfx bar full_5: 167361626527131572
-      sfx bar full_6: -5500559727365854711
-      sfx bar full_7: 2359155185517958628
-      sfx bar full_8: -3165502484680636964
-      sfx bar full_9: -7483956375976682150
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

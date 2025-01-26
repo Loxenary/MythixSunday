@@ -56,7 +56,27 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.Score.Add((long)_enemyMovement.enemyData.gainScore);
+
+        DropCoins();
+
         Destroy(gameObject);
+    }
+
+    private void DropCoins()
+    {
+        int coinCount = Random.Range(1, _enemyMovement.enemyData.maxCoinDrop + 1);
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector2 dropPosition = (Vector2)transform.position;
+            SpawnCoin(dropPosition);
+        }
+    }
+
+    private void SpawnCoin(Vector2 position)
+    {
+        GameObject coin = ObjectPool.Instance.GetFromPool("Coin", position, Quaternion.identity);
+
     }
 
 
