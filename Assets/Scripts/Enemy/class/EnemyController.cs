@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     public float damage { get; private set;}
     private Rigidbody2D rb;
 
+    private bool isDead = false;
+
     private void Start()
     {
         _enemyMovement = this.GetComponent<EnemyMovement>();
@@ -55,8 +57,30 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+        
         GameManager.Instance.Score.Add((long)_enemyMovement.enemyData.gainScore);
+        GameManager.Instance.coins.Add(_enemyMovement.enemyData.maxCoinDrop);
+        // DropCoins();
         Destroy(gameObject);
+    }
+
+    private void DropCoins()
+    {
+        int coinCount = Random.Range(1, _enemyMovement.enemyData.maxCoinDrop + 1);
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector2 dropPosition = (Vector2)transform.position;
+            SpawnCoin(dropPosition);
+        }
+    }
+
+    private void SpawnCoin(Vector2 position)
+    {
+        GameObject coin = ObjectPool.Instance.GetFromPool("Coin", position, Quaternion.identity);
+
     }
 
 

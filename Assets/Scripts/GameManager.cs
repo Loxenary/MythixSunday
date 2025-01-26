@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // TODO : Initialize playerHealth and playerLives and coins based on saved data
+        RestartGame();
     }
     public void AddCoins(int amount)
     {
@@ -63,10 +64,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame(){
         ResourcesSaveData userData = SaveLoadManager.Load<ResourcesSaveData>();
-        if(userData == null || userData == default){
+        if(userData == null || userData == default || userData.Lives == 0 || userData.Health == 0 ){
             playerLives.Set(1);
             playerHealth.Set(100);
         }else{
+            Debug.Log(userData.Lives);
+
             playerLives.Set(userData.Lives);
             playerHealth.Set(userData.Health);
         }
